@@ -1,3 +1,30 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+<header>
+  <menu class="flex justify-between text-white bg-black px-10 py-4">
+    <div class="logo text-lg hover:text-violet-600 transition-[300ms]">
+      Bohio
+    </div>
+
+    <nav class="flex justify-between gap-5">
+      <div class="flex items-center justify-between gap-4 hover:text-violet-600 transition-[300ms]">
+        <fa-icon class="text-[25px]" [icon]="faHome"></fa-icon>
+        <a class="text-lg" href="#" type="button">Home</a>
+      </div>
+
+
+      <div class="flex items-center justify-between gap-4 hover:text-violet-600 transition-[300ms]">
+        <fa-icon class="text-[25px]" [icon]="faTableList"></fa-icon>
+        <a class="text-lg" href="#" type="button">History</a>
+      </div>
+
+      <div class="flex items-center justify-between gap-4 hover:text-violet-600 transition-[300ms]">
+        <fa-icon class="text-[25px]" [icon]="faTable"></fa-icon>
+        <a class="text-lg" href="#" type="button">Admin</a>
+      </div>
+
+      <div class="flex items-center justify-between gap-4 hover:text-violet-600 transition-[300ms]">
+        <fa-icon class="text-[25px]" [icon]="faUser"></fa-icon>
+        <a class="text-lg" href="#" type="button">User</a>
+      </div>
+    </nav>
+  </menu>
+</header>
