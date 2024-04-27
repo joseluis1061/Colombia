@@ -1,1 +1,14 @@
 <app-menu-places></app-menu-places>
+
+@if (regions !== null) {
+  <div class="flex flex-wrap gap-5 p-10">
+  @for (region of regions(); track region.id) {
+      <div class="flex flex-col max-w-[300px] border rounded-xl p-5">
+        <h2 class="text-blue-600 font-bold mb-4">{{region.name}}</h2>
+        <p>{{region.description}}</p>
+        <p>{{region.departments}}</p>
+      </div>
+    }
+  </div>
+}
+
