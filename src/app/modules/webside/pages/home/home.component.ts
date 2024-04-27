@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
+import { MenuPlacesComponent } from '../../components/menu-places/menu-places.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [MenuPlacesComponent ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

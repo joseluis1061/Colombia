@@ -7,18 +7,18 @@
     <nav class="flex justify-between gap-5">
       <div class="flex items-center justify-between gap-4 hover:text-violet-600 transition-[300ms]">
         <fa-icon class="text-[25px]" [icon]="faHome"></fa-icon>
-        <a class="text-lg" href="#" type="button">Home</a>
+        <a class="text-lg" [routerLink]="['/home']" routerLinkActive="router-link-active"  type="button">Home</a>
       </div>
 
 
       <div class="flex items-center justify-between gap-4 hover:text-violet-600 transition-[300ms]">
         <fa-icon class="text-[25px]" [icon]="faTableList"></fa-icon>
-        <a class="text-lg" href="#" type="button">History</a>
+        <a class="text-lg" [routerLink]="['/history']" type="button">History</a>
       </div>
 
       <div class="flex items-center justify-between gap-4 hover:text-violet-600 transition-[300ms]">
         <fa-icon class="text-[25px]" [icon]="faTable"></fa-icon>
-        <a class="text-lg" href="#" type="button">Admin</a>
+        <a class="text-lg" [routerLink]="['/admin']" type="button">Admin</a>
       </div>
 
       <div class="flex items-center justify-between gap-4 hover:text-violet-600 transition-[300ms]">
