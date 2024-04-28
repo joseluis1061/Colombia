@@ -1,8 +1,11 @@
-<div cdkMenuBar>
-  <button class="cursor-pointer select-none min-w-9 py-0 px-4 leading-7" cdkMenuItem [cdkMenuTriggerFor]="file">File</button>
-  <button class="cursor-pointer select-none min-w-9 py-0 px-4 leading-7" cdkMenuItem [cdkMenuTriggerFor]="edit">Edit</button>
-  <button class="cursor-pointer select-none min-w-9 py-0 px-4 leading-7" cdkMenuItem [cdkMenuTriggerFor]="format">Format</button>
-</div>
+<menu class="w-full flex justify-center">
+  <div cdkMenuBar class="w-[90%]">
+    <button class="cursor-pointer select-none min-w-9 py-0 leading-7" cdkMenuItem [cdkMenuTriggerFor]="file">File</button>
+    <button class="cursor-pointer select-none min-w-9 py-0 leading-7" cdkMenuItem [cdkMenuTriggerFor]="edit">Edit</button>
+    <button class="cursor-pointer select-none min-w-9 py-0 leading-7" cdkMenuItem [cdkMenuTriggerFor]="format">Format</button>
+  </div>
+</menu>
+
 
 
 <ng-template #file>
