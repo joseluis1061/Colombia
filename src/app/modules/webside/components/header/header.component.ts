@@ -7,6 +7,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faTable } from '@fortawesome/free-solid-svg-icons';
 import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class HeaderComponent {
   faTable = faTable;
   faTableList = faTableList;
   faUser = faUser;
+  faBars = faBars;
 
   constructor(
     private router: Router

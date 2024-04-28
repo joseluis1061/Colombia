@@ -4,7 +4,7 @@
       Bohio
     </div>
 
-    <nav class="flex justify-between gap-5">
+    <nav class="hidden lg:flex justify-between gap-5 ">
       <div class="flex items-center justify-between gap-4 hover:text-violet-600 transition-[300ms]">
         <fa-icon class="text-[25px]" [icon]="faHome"></fa-icon>
         <a class="text-lg" [routerLink]="['/home']" routerLinkActive="router-link-active"  type="button">Home</a>
@@ -26,5 +26,9 @@
         <a class="text-lg" href="#" type="button">User</a>
       </div>
     </nav>
+
+    <div class="menu-mobile lg:hidden">
+      <fa-icon class="text-[25px]" [icon]="faBars"></fa-icon>
+    </div>
   </menu>
 </header>
