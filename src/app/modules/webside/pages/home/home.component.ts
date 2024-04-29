@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     this.placesColombianService.getRegions().subscribe({
       next: (regions) => {
         this.regions.set(regions)
+        console.log(regions)
       }
     })
   }

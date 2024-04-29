@@ -1,7 +1,12 @@
 <menu class="flex justify-center">
-  <nav class="w-[90%] py-4">
-    <button class="relative" (click)="isOpen = !isOpen" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+  <nav class="w-[90%] flex justify-start gap-4 py-4">
+    <button class="relative" (click)="isOpenRegion = !isOpenRegion" type="button" cdkOverlayOrigin #region="cdkOverlayOrigin">
       Region
+    </button>
+
+
+    <button [disabled]="!deparments()"  class="relative" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
+      Departamento
     </button>
 
   </nav>
@@ -10,12 +15,24 @@
 <!-- This template displays the overlay content and is connected to the button -->
 <ng-template
   cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="trigger"
-  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayOrigin]="region"
+  [cdkConnectedOverlayOpen]="isOpenRegion"
 >
   <ul class="bg-white flex flex-col gap-4 p-4 shadow-sm border">
     @for (region of regions(); track region.id) {
-      <li>{{region.name}}</li>
+      <li class="cursor-pointer hover:bg-violet-600" (click)="selectRegionIdDepartments(region.id)">{{region.name}}</li>
+    }
+  </ul>
+</ng-template>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="department"
+  [cdkConnectedOverlayOpen]="isOpenDepartment"
+>
+  <ul class="bg-white flex flex-col gap-4 p-4 shadow-sm border">
+    @for (department of deparments(); track department.id) {
+      <li class="cursor-pointer hover:bg-violet-600" (click)="selectRegionIdDepartments(department.id)">{{department.name}}</li>
     }
   </ul>
 </ng-template>
