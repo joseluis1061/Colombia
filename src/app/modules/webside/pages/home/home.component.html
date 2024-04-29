@@ -1,13 +1,33 @@
 <app-menu-places></app-menu-places>
 
-<main class="flex justify-center w-full">
-  @if (regions !== null) {
-    <div class="flex flex-wrap justify-stretch gap-4 w-[90%]">
-    @for (region of regions(); track region.id) {
-        <app-card-region [region]="region"></app-card-region>
-      }
-    </div>
-  }
+<main class="flex justify-center w-full py-4">
+  <div class="flex flex-col flex-wrap justify-stretch gap-4 w-[90%]">
+    @if(colombia()){
+      <section >
+        <h1>Colombia</h1>
+        <div>
+          <ul class="flex gap-4">
+            @for (language of colombia()?.languages; track $index) {
+              <li>{{language}}</li>
+            }
+          </ul>
+        </div>
+      </section>
+    }
+
+    @if (regions !== null) {
+      <h2>Regiones</h2>
+      <div class="flex flex-wrap justify-stretch gap-4">
+      @for (region of regions(); track region.id) {
+          <app-card-region [region]="region"></app-card-region>
+        }
+      </div>
+    }
+  </div>
+
+
+
+
 </main>
 
 

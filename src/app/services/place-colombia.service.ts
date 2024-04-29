@@ -1,9 +1,10 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Regions, RegionDeparments, Department, City, TouristAttraction, President, CategoryNaturalArea, MapColombian } from '../models/colombian.models';
+import { Colombia, Regions, RegionDeparments, Department, City, TouristAttraction, President, CategoryNaturalArea, MapColombian } from '../models/colombian.models';
 import { map } from 'rxjs';
 import { REGIONS_IMAGE } from '../shared/constants/regions-image.const';
+import { subscribe } from 'node:diagnostics_channel';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,16 @@ import { REGIONS_IMAGE } from '../shared/constants/regions-image.const';
 export class PlaceColombiaService {
 
   private urlApi = environment.API_URL;
+  colombia = signal<Colombia | null>(null);
+  regions = signal<Regions[]>([]);
+
   private http = inject(HttpClient);
 
   getGeneralColombia(){
-    return this.http.get(`${this.urlApi}/Country/Colombia`);
+    this.http.get<Colombia>(`${this.urlApi}/Country/Colombia`)
+      .subscribe({
+        next: (res) => this.colombia.set(res)
+      });
   }
 
   getRegions(){
