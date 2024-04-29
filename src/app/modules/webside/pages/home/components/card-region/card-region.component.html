@@ -1,1 +1,6 @@
-<p>card-region works!</p>
+<div class="flex flex-col max-w-[300px] border rounded-xl p-5">
+  <img class="w-full h-36" [src]="region.image" alt="image" loading="lazy">
+  <h2 class="text-blue-600 font-bold my-2">{{region.name}}</h2>
+  <p>{{region.description}}</p>
+  <p>{{region.departments}}</p>
+</div>

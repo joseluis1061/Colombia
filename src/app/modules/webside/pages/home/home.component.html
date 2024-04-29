@@ -4,12 +4,7 @@
   @if (regions !== null) {
     <div class="flex flex-wrap justify-stretch gap-4 w-[90%]">
     @for (region of regions(); track region.id) {
-        <div class="flex flex-col max-w-[300px] border rounded-xl p-5">
-          <img class="w-full h-36" [src]="region.image" alt="image" loading="lazy">
-          <h2 class="text-blue-600 font-bold mb-4">{{region.name}}</h2>
-          <p>{{region.description}}</p>
-          <p>{{region.departments}}</p>
-        </div>
+        <app-card-region [region]="region"></app-card-region>
       }
     </div>
   }

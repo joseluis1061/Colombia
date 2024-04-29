@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Regions } from '../../../../../../models/colombian.models';
 
 @Component({
   selector: 'app-card-region',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './card-region.component.html'
 })
 export class CardRegionComponent {
+  @Input() region!: Regions;
 
 }
