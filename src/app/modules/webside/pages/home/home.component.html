@@ -1,33 +1,79 @@
-<app-menu-places></app-menu-places>
+<div class="home h-screen">
+  <div class="home__container flex flex-wrap justify-stretch w-[90%] h-full m-auto">
 
-<main class="flex justify-center w-full py-4">
-  <div class="flex flex-col flex-wrap justify-stretch gap-4 w-[90%]">
-    @if(colombia()){
-      <section >
-        <h1>Colombia</h1>
-        <div>
-          <ul class="flex gap-4">
-            @for (language of colombia()?.languages; track $index) {
-              <li>{{language}}</li>
-            }
-          </ul>
+    <div class="home__thumbnails relative z-10 pt-14 w-1/2 h-2/3 flex flex-col justify-between border border-blue-500">
+
+      <div class="flex flex-col">
+        <div class="logo w-52">
+          <img class="object-cover" src="../../../../../assets/img/logo 2.svg" alt="logo" loading="lazy">
         </div>
-      </section>
-    }
 
-    @if (regions !== null) {
-      <h2>Regiones</h2>
-      <div class="flex flex-wrap justify-stretch gap-4">
-      @for (region of regions(); track region.id) {
-          <app-card-region [region]="region"></app-card-region>
-        }
+        <h2>Explora mas allá del horizonte</h2>
       </div>
-    }
+
+
+      <div class="thumbnails__carousel w-full flex items-end flex-wrap">
+        <div class="carousel__wraper">
+          <div class="thumbnail__item flex flex-col w-40 h-56 relative">
+            <img class="w-full h-full object-cover" src="../../../../../assets/img/regions/region_amazonia.jpg" alt="regions" loading="lazy">
+            <div class="thumbnail__leyend absolute bottom-0 bg-blue-950 px-2 py-2 text-white w-full">
+              <p>Región x</p>
+            </div>
+          </div>
+          <div class="thumbnail__item flex flex-col w-40 h-56 relative">
+            <img class="w-full h-full object-cover" src="../../../../../assets/img/regions/region_andina.jpg" alt="regions" loading="lazy">
+            <div class="thumbnail__leyend absolute bottom-0 bg-blue-950 px-2 py-2 text-white w-full">
+              <p>Región x</p>
+            </div>
+          </div>
+          <div class="thumbnail__item flex flex-col w-40 h-56 relative">
+            <img class="w-full h-full object-cover" src="../../../../../assets/img/regions/region_caribe.jpg" alt="regions" loading="lazy">
+            <div class="thumbnail__leyend absolute bottom-0 bg-blue-950 px-2 py-2 text-white w-full">
+              <p>Región x</p>
+            </div>
+          </div>
+          <div class="thumbnail__item flex flex-col w-40 h-56 relative">
+            <img class="w-full h-full object-cover" src="../../../../../assets/img/regions/region_insular.jpg" alt="regions" loading="lazy">
+            <div class="thumbnail__leyend absolute bottom-0 bg-blue-950 px-2 py-2 text-white w-full">
+              <p>Región x</p>
+            </div>
+          </div>
+          <div class="thumbnail__item flex flex-col w-40 h-56 relative">
+            <img class="w-full h-full object-cover" src="../../../../../assets/img/regions/region_orinoquia.jpg" alt="regions" loading="lazy">
+            <div class="thumbnail__leyend absolute bottom-0 bg-blue-950 px-2 py-2 text-white w-full">
+              <p>Región x</p>
+            </div>
+          </div>
+          <div class="thumbnail__item flex flex-col w-40 h-56 relative">
+            <img class="w-full h-full object-cover" src="../../../../../assets/img/regions/region_pacifico.jpg" alt="regions" loading="lazy">
+            <div class="thumbnail__leyend absolute bottom-0 bg-blue-950 px-2 py-2 text-white w-full">
+              <p>Región x</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="arrows flex-grow self-end flex items-center p-2 gap-5">
+          <button type="button" class=""><</button>
+          <button type="button" class="">></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="home__explore relative w-1/2 h-2/3 border border-red-500">
+      <img class="object-cover h-full w-full" src="../../../../../assets/img/regions/region_amazonia.jpg" alt="region-explore" loading="lazy">
+      <button class="absolute bottom-5 right-5 py-2 px-4 rounded-2xl text-white font-bold border-none bg-blue-950 hover:bg-blue-800" type="button">Explora</button>
+    </div>
+
+    <div class="home_services">
+
+    </div>
+
+    <div class="home__events">
+
+    </div>
+
   </div>
+</div>
 
-
-
-
-</main>
 
 
