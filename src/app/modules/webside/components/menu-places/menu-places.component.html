@@ -1,14 +1,40 @@
 <menu class="flex justify-center">
-  <nav class="w-[90%] flex justify-start gap-4 py-4">
-    <button class="relative" (click)="isOpenRegion = !isOpenRegion" type="button" cdkOverlayOrigin #region="cdkOverlayOrigin">
+  <nav class="flex justify-start gap-4 py-4">
+    <button class="" (click)="isOpenRegion = !isOpenRegion" type="button" cdkOverlayOrigin #region="cdkOverlayOrigin">
       Region
     </button>
 
-
-    <button [disabled]="!deparments()"  class="relative" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
+    <button [disabled]="!deparments()"  class="" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
       Departamento
     </button>
 
+    <button [disabled]="!deparments()"  class="" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
+      Municipio
+    </button>
+
+    <button [disabled]="!deparments()"  class="" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
+      Restaurantes
+    </button>
+
+    <button [disabled]="!deparments()"  class="" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
+      Hoteles
+    </button>
+
+    <button [disabled]="!deparments()"  class="" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
+      Viajes
+    </button>
+
+    <button [disabled]="!deparments()"  class="" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
+      Tours
+    </button>
+
+    <button [disabled]="!deparments()"  class="" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
+      Paquetes
+    </button>
+
+    <button [disabled]="!deparments()"  class="" (click)="isOpenDepartment = !isOpenDepartment" type="button" cdkOverlayOrigin #department="cdkOverlayOrigin">
+      Cerca de tí
+    </button>
   </nav>
 </menu>
 
