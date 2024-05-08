@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { RouterLinkWithHref } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +14,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FontAwesomeModule, RouterModule],
+  imports: [FontAwesomeModule, RouterLinkWithHref, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
