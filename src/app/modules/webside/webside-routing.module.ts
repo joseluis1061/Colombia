@@ -5,6 +5,8 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HistoryComponent } from './pages/history/history.component';
 
+import { RestaurantsComponent } from './pages/restaurants/restaurants.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +32,10 @@ const routes: Routes = [
       {
         path: 'admin',
         loadChildren: () => import('../administrador/administrador.module').then(m => m.AdministradorModule)
+      },
+      {
+        path: 'restautants',
+        component: RestaurantsComponent
       },
     ]
   }
