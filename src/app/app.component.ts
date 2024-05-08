@@ -12,10 +12,10 @@ import { Colombia } from './models/colombian.models';
 })
 export class AppComponent implements OnInit{
   title = 'turismo-comunitario';
-  private placeColombiaService = inject(PlaceColombiaService);
-  colombia = this.placeColombiaService.colombia;
+  // private placeColombiaService = inject(PlaceColombiaService);
+  //colombia = this.placeColombiaService.colombia;
   ngOnInit(): void {
-    this.placeColombiaService.getGeneralColombia();
-    console.log(this.colombia())
+    //this.placeColombiaService.getGeneralColombia();
+    //console.log(this.colombia())
   }
 }
