@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { AdministradorRoutingModule } from './administrador-routing.module';
 
@@ -8,7 +9,8 @@ import { AdministradorRoutingModule } from './administrador-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    AdministradorRoutingModule
+    AdministradorRoutingModule,
+    RouterModule
   ]
 })
 export class AdministradorModule { }
