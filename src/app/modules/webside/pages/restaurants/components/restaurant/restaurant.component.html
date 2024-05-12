@@ -6,8 +6,7 @@
     <div class="flex min-h-1/3 w-full">
       <div class="w-1/2 h-full overflow-hidden relative">
         <div class="absolute w-full left-0 bottom-0 bg-blue-950 text-white p-2">
-          <!-- <app-star-rating-component [rating]="3" (ratingChange)="onRatingChange($event)"></app-star-rating-component> -->
-          <app-star-rating-component [averageRating]="3"></app-star-rating-component>
+          <app-star-rating-component [averageRating]="4"></app-star-rating-component>
           <p>
             Traditional Colombian food made with traditional techniques and
             wood-burning stove.
@@ -146,10 +145,38 @@
     </div>
 
     <div class="flex flex-col w-full border-gray-400 border-t-2 mt-4">
-      <h2 class="text-blue-950 text-[1.5em] font-bold mt-2">Comentarios</h2>
-      <p>
-        Aún no hay comentarios se el primero en agregar uno
-      </p>
+      <div class="flex justify-between my-5">
+        <h2 class="text-blue-950 text-[1.5em] font-bold mt-2">Comentarios</h2>
+        <button
+          class="w-[250px] bg-lime-500 hover:bg-lime-400 py-2 rounded-lg font-bold"
+          type="button"
+        >
+          Agregar calificación
+        </button>
+      </div>
+      @if(users() === null){
+        <p>
+          Aún no hay comentarios se el primero en agregar uno
+        </p>
+      }@else{
+        <div class="flex w-full">
+          @for (user of users(); track $index) {
+            <div class="flex items-center gap-5">
+              <div class="flex flex-col justify-center items-center">
+                <img class="rounded-full" [src]="user.picture.thumbnail" alt="user imaga" loading="lazy">
+                <p>{{user.name.first}}</p>
+              </div>
+              <div>
+                <p>
+                  Exclente lugar, con acabados coloniales y buen sabor en su comida. El parqueadero es pequeño, debes llegar con anticipación.
+                </p>
+                <app-star-rating-component [averageRating]="4"></app-star-rating-component>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
 
     </div>
 

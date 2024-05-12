@@ -15,7 +15,7 @@ export class StarRatingComponentComponent implements OnInit{
 
   constructor() {
     // this.stars = ['star-outline', 'star-outline', 'star-outline', 'star-outline', 'star-outline'];
-    this.stars = ['&#9733;', '&#9733;', '&#9733;', '&#9733;', '&#9733;'];
+    this.stars = ['&#9734;', '&#9734;', '&#9734;', '&#9734;', '&#9734;'];
     // for (let i = 0; i < 5; i++) {
     //   this.stars.push('&#9733;');
     // }
@@ -23,7 +23,11 @@ export class StarRatingComponentComponent implements OnInit{
   
   ngOnInit(): void {
     console.log("averageRating", this.averageRating);
-    
+    if(this.averageRating !=0){
+      for (let index = 0; index < this.averageRating; index++) {
+        this.stars[index] = '&#9733;'
+      }
+    }
   }
 
   rate(event: MouseEvent) {
@@ -48,7 +52,7 @@ export class StarRatingComponentComponent implements OnInit{
 
   updateStars() {
     for (let i = 0; i < 5; i++) {
-      this.stars[i] = i < this.averageRating ? '&#9734;' : '&#9733;';
+      this.stars[i] = i < this.averageRating ? '&#9733;' : '&#9734;';
       // this.stars[i] = i < this.averageRating ? '&#9734;' : '&#9733;';
     }
   }
