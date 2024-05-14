@@ -22,7 +22,7 @@ export class RestaurantComponent {
 
   usersService = inject(UsersService);
   user:UserModel| null = null;
-  users= signal<UserModel[] | null>(null);
+  users= signal<UserModel[]>([]);
 
   ngOnInit(): void {
     for (let index = 0; index < 10; index++) {
@@ -33,14 +33,7 @@ export class RestaurantComponent {
   getUsers(){
     this.usersService.getUser().subscribe(
       (result:UserModel) => {
-        if(this.users() === null){
-          this.users.set([result])
-        }else{
-          const usersCopy = this.users();
-          usersCopy?.map((user) =>{
-            //todo
-          })
-        }
+        this.users?.update(preview => [...preview, result])
       }
     )
   }
