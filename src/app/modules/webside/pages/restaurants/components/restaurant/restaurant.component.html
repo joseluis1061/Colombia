@@ -56,6 +56,7 @@
             <button
               class="w-[250px] bg-lime-500 hover:bg-lime-400 py-2 rounded-lg font-bold"
               type="button"
+              (click)="toogleMenuOptions=!toogleMenuOptions"
             >
               Carta
             </button>
@@ -71,79 +72,81 @@
       </div>
     </div>
 
-    <div class="flex flex-col w-full">
-      <h2 class="text-blue-950 text-[1.5em] font-bold">Carta</h2>
-      <div class="flex">
-        <div class="w-1/2">
-          <h3 class="text-blue-950 font-bold">Desayunos:</h3>
-          <ul>
-            <li>Arepas de huevo con hogao</li>
-            <li>Calentado paisa con chorizo y aguacate</li>
-            <li>Tamal tolimense con chocolate caliente</li>
-            <li>Changua con cilantro y almojábana</li>
-            <li>
-              Huevos revueltos con tomate y cebolla acompañados de arepas
-              antioqueñas
-            </li>
-            <li>Caldo de costilla con yuca y cilantro</li>
-          </ul>
+    @if (toogleMenuOptions) {
+      <div class="flex flex-col w-full">
+        <h2 class="text-blue-950 text-[1.5em] font-bold">Carta</h2>
+        <div class="flex">
+          <div class="w-1/2">
+            <h3 class="text-blue-950 font-bold">Desayunos:</h3>
+            <ul>
+              <li>Arepas de huevo con hogao</li>
+              <li>Calentado paisa con chorizo y aguacate</li>
+              <li>Tamal tolimense con chocolate caliente</li>
+              <li>Changua con cilantro y almojábana</li>
+              <li>
+                Huevos revueltos con tomate y cebolla acompañados de arepas
+                antioqueñas
+              </li>
+              <li>Caldo de costilla con yuca y cilantro</li>
+            </ul>
 
-          <h3 class="text-blue-950 font-bold mt-5">Entradas:</h3>
-          <ul>
-            <li>Empanadas vallunas con aji picante</li>
-            <li>Patacones con hogao y queso costeño</li>
-            <li>Aborrajados de plátano con bocadillo y queso</li>
-            <li>Buñuelos con salsa de hogao</li>
-            <li>Chorizo santarrosano con limón y arepa</li>
-            <li>Ensalada de palmitos con aguacate y tomate</li>
-          </ul>
+            <h3 class="text-blue-950 font-bold mt-5">Entradas:</h3>
+            <ul>
+              <li>Empanadas vallunas con aji picante</li>
+              <li>Patacones con hogao y queso costeño</li>
+              <li>Aborrajados de plátano con bocadillo y queso</li>
+              <li>Buñuelos con salsa de hogao</li>
+              <li>Chorizo santarrosano con limón y arepa</li>
+              <li>Ensalada de palmitos con aguacate y tomate</li>
+            </ul>
 
-          <h3 class="text-blue-950 font-bold mt-5">Almuerzo:</h3>
-          <ul>
-            <li>Bandeja paisa con frijoles, chicharrón y plátano maduro</li>
-            <li>Ajiaco santafereño con su crema y alcaparras</li>
-            <li>Cazuela de mariscos con arroz de coco</li>
-            <li>Lechona tolimense acompañada de insulso y ají</li>
-            <li>Sancocho trifásico con mazorca, plátano y yuca</li>
-            <li>Arroz atollado vallecaucano con pollo y longaniza</li>
-          </ul>
+            <h3 class="text-blue-950 font-bold mt-5">Almuerzo:</h3>
+            <ul>
+              <li>Bandeja paisa con frijoles, chicharrón y plátano maduro</li>
+              <li>Ajiaco santafereño con su crema y alcaparras</li>
+              <li>Cazuela de mariscos con arroz de coco</li>
+              <li>Lechona tolimense acompañada de insulso y ají</li>
+              <li>Sancocho trifásico con mazorca, plátano y yuca</li>
+              <li>Arroz atollado vallecaucano con pollo y longaniza</li>
+            </ul>
 
-        </div>
-        <div class="w-1/2 ps-5">
-          <h3 class="text-blue-950 font-bold">Cena:</h3>
-          <ul>
-            <li>Sobrebarriga en salsa criolla con yuca al mojo</li>
-            <li>Trucha al ajillo con patacones y ensalada fresca</li>
-            <li>Lomo al trapo con arepa de choclo y guacamole</li>
-            <li>Carne desmechada con arroz blanco y aguacate</li>
-            <li>Pargo rojo frito con arroz con coco y ensalada de aguacate</li>
-            <li>Mondongo antioqueño con aguacate y limón</li>
-          </ul>
+          </div>
+          <div class="w-1/2 ps-5">
+            <h3 class="text-blue-950 font-bold">Cena:</h3>
+            <ul>
+              <li>Sobrebarriga en salsa criolla con yuca al mojo</li>
+              <li>Trucha al ajillo con patacones y ensalada fresca</li>
+              <li>Lomo al trapo con arepa de choclo y guacamole</li>
+              <li>Carne desmechada con arroz blanco y aguacate</li>
+              <li>Pargo rojo frito con arroz con coco y ensalada de aguacate</li>
+              <li>Mondongo antioqueño con aguacate y limón</li>
+            </ul>
 
-          <h3 class="text-blue-950 font-bold mt-5">Bebidas:</h3>
-          <ul>
-            <li>Lulada vallecaucana</li>
-            <li>Jugo de guanábana en leche</li>
-            <li>Refajo con cerveza y Colombiana</li>
-            <li>Champús valluno</li>
-            <li>Aguardiente antioqueño con limón y agua de panela</li>
-            <li>Café de olla con canela y clavo</li>
-          </ul>
+            <h3 class="text-blue-950 font-bold mt-5">Bebidas:</h3>
+            <ul>
+              <li>Lulada vallecaucana</li>
+              <li>Jugo de guanábana en leche</li>
+              <li>Refajo con cerveza y Colombiana</li>
+              <li>Champús valluno</li>
+              <li>Aguardiente antioqueño con limón y agua de panela</li>
+              <li>Café de olla con canela y clavo</li>
+            </ul>
 
 
-          <h3 class="text-blue-950 font-bold mt-5">Postres:</h3>
+            <h3 class="text-blue-950 font-bold mt-5">Postres:</h3>
 
-          <ul>
-            <li>Brevas con arequipe y queso fresco</li>
-            <li>Cuajada con melao y galletas de achira</li>
-            <li>Helado de curuba con salsa de mora</li>
-            <li>Tres leches con coco rallado</li>
-            <li>Natilla con buñuelos y bocadillo</li>
-            <li>Rollo de guayaba con queso costeño</li>
-          </ul>
+            <ul>
+              <li>Brevas con arequipe y queso fresco</li>
+              <li>Cuajada con melao y galletas de achira</li>
+              <li>Helado de curuba con salsa de mora</li>
+              <li>Tres leches con coco rallado</li>
+              <li>Natilla con buñuelos y bocadillo</li>
+              <li>Rollo de guayaba con queso costeño</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    }
 
     <div class="flex flex-col w-full border-gray-400 border-t-2 mt-4">
       <div class="flex justify-between my-5">

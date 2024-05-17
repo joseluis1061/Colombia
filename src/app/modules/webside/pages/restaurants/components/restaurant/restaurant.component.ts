@@ -24,6 +24,7 @@ export class RestaurantComponent {
   usersService = inject(UsersService);
   user:UserModel| null = null;
   users= signal<UserModel[]>([]);
+  toogleMenuOptions = false;
 
   constructor(
     private dialog: Dialog,
