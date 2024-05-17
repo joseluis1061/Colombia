@@ -1,7 +1,9 @@
-<section class="">
-  <button type="button" (click)="close()">X</button>
-  <h1>{{namePlace}}</h1>
-  <h2>Reserva</h2>
+<section class="p-0">
+  <div class="flex justify-between text-blue-950">
+    <h1 class="text-blue-950">{{namePlace}}</h1>
+    <button class="text-blue-950" type="button" (click)="close()">X</button>
+  </div>
+  <h2 class="text-blue-950 text-2xl">Reserva</h2>
   <form class="max-w-md mx-auto" [formGroup]="reservationForm" (ngSubmit)="onSubmitReservation()">
 
     <div class="grid md:grid-cols-2 md:gap-6">
