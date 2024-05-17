@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, type OnInit } from '@angular/core';
 import { DialogRef, Dialog, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
-
+import { StarRatingComponentComponent } from '../../../../../../shared/components/star-rating-component/star-rating-component.component';
 interface InputData {
   name: string;
 }
@@ -11,12 +11,12 @@ interface OutputData {
 }
 
 @Component({
-  selector: 'app-reservation',
+  selector: 'app-comment',
   standalone: true,
   imports: [
-    CommonModule, DialogModule, ReactiveFormsModule
+    CommonModule, DialogModule, ReactiveFormsModule, StarRatingComponentComponent
   ],
-  templateUrl: './reservation.component.html',
+  templateUrl: `./comment.component.html`,
   styles:`
   :host{
     display: block;
@@ -50,12 +50,12 @@ interface OutputData {
     }
   }
   }
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReservationComponent implements OnInit{
-  namePlace: string = '';
+export class CommentComponent implements OnInit {
 
-  reservationForm: FormGroup = new FormGroup({});
+  commentForm: FormGroup = new FormGroup({});
 
   ngOnInit(): void {
     this.initFormParent();
@@ -63,7 +63,7 @@ export class ReservationComponent implements OnInit{
 
    // Inicializa campos y define validaciones de formulario
   initFormParent(): void {
-    this.reservationForm = new FormGroup({
+    this.commentForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       idNumber: new FormControl('', Validators.required),
@@ -81,7 +81,7 @@ export class ReservationComponent implements OnInit{
     private dialogRef: DialogRef<OutputData>,
     @Inject(DIALOG_DATA) data: InputData
   ) {
-    this.namePlace = data.name;
+    // this.namePlace = data.name;
   }
 
   close() {
@@ -92,8 +92,9 @@ export class ReservationComponent implements OnInit{
     this.dialogRef.close({ rta });
   }
 
-  onSubmitReservation(){
-    console.log(this.reservationForm.value);
+  onSubmitComment(){
+    console.log(this.commentForm.value);
     this.close();
   }
+
 }

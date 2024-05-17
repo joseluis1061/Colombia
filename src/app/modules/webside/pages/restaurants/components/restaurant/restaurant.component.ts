@@ -8,6 +8,7 @@ import { UsersService } from '../../../../../../services/users.service';
 import { RootObject, UserModel } from '../../../../../../models/user.model';
 
 import { ReservationComponent } from '../reservation/reservation.component';
+import { CommentComponent } from '../comment/comment.component';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 
 @Component({
@@ -52,6 +53,21 @@ export class RestaurantComponent {
 
   openDialog(name: string) {
     const dialogRef = this.dialog.open(ReservationComponent, {
+      minWidth: '300px',
+      maxWidth : '50%',
+      disableClose: true,
+      autoFocus: false,
+      data: {
+        name: name,
+      }
+    });
+    dialogRef.closed.subscribe(output => {
+      console.log(output);
+    })
+  }
+
+  openDialogComment(name: string) {
+    const dialogRef = this.dialog.open(CommentComponent, {
       minWidth: '300px',
       maxWidth : '50%',
       disableClose: true,
