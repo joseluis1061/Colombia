@@ -31,10 +31,6 @@ const routes: Routes = [
         component: HistoryComponent
       },
       {
-        path: 'admin',
-        loadChildren: () => import('../administrador/administrador.module').then(m => m.AdministradorModule)
-      },
-      {
         path: 'restautants',
         component: RestaurantsComponent
       },
