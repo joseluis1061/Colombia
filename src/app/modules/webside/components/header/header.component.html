@@ -21,9 +21,12 @@
         <a class="text-lg" [routerLink]="['/admin']" type="button">Admin</a>
       </div>
 
-      <div class="flex items-center justify-between gap-4 hover:text-lime-600 transition-[300ms]">
+      <div 
+        class="flex items-center justify-between gap-4 hover:text-lime-600 transition-[300ms]"
+        (click)="openDialogLogin()"
+      >
         <!-- <fa-icon class="text-[25px]" [icon]="faUser"></fa-icon> -->
-        <a class="text-lg" href="#" type="button">User</a>
+        <a class="text-lg" type="button">Login</a>
       </div>
 
       <div class="flex items-center">

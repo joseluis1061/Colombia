@@ -10,6 +10,8 @@ import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
+import { Dialog } from '@angular/cdk/dialog';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-header',
@@ -27,8 +29,23 @@ export class HeaderComponent {
   faBars = faBars;
 
   constructor(
+    private dialog: Dialog,
     private router: Router
   ){}
 
 
+  openDialogLogin() {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      minWidth: '300px',
+      maxWidth : '50%',
+      disableClose: true,
+      autoFocus: false,
+      data: {
+        // todo: todo,
+      }
+    });
+    dialogRef.closed.subscribe(output => {
+      console.log(output);
+    })
+  }
 }
