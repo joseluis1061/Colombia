@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { Firestore, collection, collectionData, getDocs } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+// import { Firestore, collection, collectionData, getDocs } from '@angular/fire/firestore';
+// import { Observable } from 'rxjs';
 
-interface Item {
-  name: string,
-};
+// interface Item {
+//   name: string,
+// };
 
 @Component({
   selector: 'app-root',
@@ -17,13 +17,13 @@ interface Item {
 })
 export class AppComponent implements OnInit{
   title = 'turismo-comunitario';
-  firestore: Firestore = inject(Firestore);
-  item$!: Observable<Item[]>;
+  // firestore: Firestore = inject(Firestore);
+  // item$!: Observable<Item[]>;
 
-  constructor() {
-    const itemCollection = collection(this.firestore, 'items');
-    this.item$ = collectionData(itemCollection) as Observable<Item[]>;
-  }
+  // constructor() {
+  //   const itemCollection = collection(this.firestore, 'items');
+  //   this.item$ = collectionData(itemCollection) as Observable<Item[]>;
+  // }
 
 
   ngOnInit(): void {
