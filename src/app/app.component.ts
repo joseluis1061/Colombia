@@ -1,21 +1,32 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { PlaceColombiaService } from './services/place-colombia.service';
-import { Colombia } from './models/colombian.models';
+import { Firestore, collection, collectionData, getDocs } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+interface Item {
+  name: string,
+};
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
   title = 'turismo-comunitario';
-  // private placeColombiaService = inject(PlaceColombiaService);
-  //colombia = this.placeColombiaService.colombia;
+  firestore: Firestore = inject(Firestore);
+  item$!: Observable<Item[]>;
+
+  constructor() {
+    const itemCollection = collection(this.firestore, 'items');
+    this.item$ = collectionData(itemCollection) as Observable<Item[]>;
+  }
+
+
   ngOnInit(): void {
-    //this.placeColombiaService.getGeneralColombia();
-    //console.log(this.colombia())
+
   }
 }
