@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DialogModule } from '@angular/cdk/dialog';
-import { DialogRef, Dialog, DIALOG_DATA } from '@angular/cdk/dialog';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
-import { RegisterUserComponent } from '../registerUser/registerUser.component';
 
 interface OutputData {
   rta: Boolean;
 }
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register-user',
   standalone: true,
-  imports: [ CommonModule, DialogModule, ReactiveFormsModule ],
-  templateUrl: './login.component.html',
+  imports: [
+    CommonModule,
+  ],
+  templateUrl: './registerUser.component.html',
   styles:`
   :host{
     display: block;
@@ -50,29 +51,26 @@ interface OutputData {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup = new FormGroup({});
+export class RegisterUserComponent {
+  reservationForm: FormGroup = new FormGroup({});
 
   constructor(
     private dialogRef: DialogRef<OutputData>,
-    private dialog: Dialog,
   ) {}
 
 
-  ngOnInit(): void {
-    this.initFormParent();
-  }
+  ngOnInit(): void { }
 
   // Inicializa campos y define validaciones de formulario
   initFormParent(): void {
-    this.loginForm = new FormGroup({
+    this.reservationForm = new FormGroup({
       email: new FormControl('', Validators.email),
       password: new FormControl('', [Validators.required, Validators.minLength(5)]),
     });
   }
 
   onSubmitLogin(){
-    console.log(this.loginForm.value);
+    console.log(this.reservationForm.value);
     this.close();
   }
 
@@ -83,18 +81,4 @@ export class LoginComponent implements OnInit {
   closeWithRta(rta: boolean) {
     this.dialogRef.close({ rta });
   }
-
-  openRegisterDialog() {
-    this.close();
-    const dialogRef = this.dialog.open(RegisterUserComponent, {
-      minWidth: '300px',
-      maxWidth : '50%',
-      disableClose: true,
-      autoFocus: false,
-    });
-    dialogRef.closed.subscribe(output => {
-      console.log("Register Output: ", output);
-    })
-  }
-
 }

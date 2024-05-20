@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DialogRef, Dialog, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
+import { DialogRef, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
 
 interface InputData {
@@ -61,7 +61,7 @@ export class ReservationComponent implements OnInit{
     this.initFormParent();
   }
 
-   // Inicializa campos y define validaciones de formulario
+  // Inicializa campos y define validaciones de formulario
   initFormParent(): void {
     this.reservationForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
