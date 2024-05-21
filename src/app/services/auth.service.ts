@@ -18,6 +18,7 @@ export class AuthService {
     signInWithEmailAndPassword(this.auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      location.reload();
       console.log("Login User: ", userCredential);
     })
     .catch((error) => {
@@ -56,13 +57,13 @@ export class AuthService {
   }
 
   // Función para verificar si hay un usuario logeado
-  isAuthenticated(): Observable<boolean> {
+  isAuthenticated(): Observable<any> {
     return new Observable(observer => {
       onAuthStateChanged(this.auth, user => {
         if (user) {
-          observer.next(true);
+          observer.next(user);
         } else {
-          observer.next(false);
+          observer.next(null);
         }
         observer.complete();
       });

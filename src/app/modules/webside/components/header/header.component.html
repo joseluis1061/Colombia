@@ -21,13 +21,34 @@
         <a class="text-lg" [routerLink]="['/admin']" type="button">Admin</a>
       </div>
 
-      <div 
-        class="flex items-center justify-between gap-4 hover:text-lime-600 transition-[300ms]"
-        (click)="openDialogLogin()"
-      >
-        <!-- <fa-icon class="text-[25px]" [icon]="faUser"></fa-icon> -->
-        <a class="text-lg" type="button">Login</a>
-      </div>
+      @if (userCurrent() === null) {
+        <div
+          class="flex items-center justify-between gap-4 hover:text-lime-600 transition-[300ms]"
+          (click)="openDialogLogin()"
+        >
+          <!-- <fa-icon class="text-[25px]" [icon]="faUser"></fa-icon> -->
+          <a class="text-lg" type="button">Login</a>
+        </div>
+      }@else {
+        <button type="button" class="flex items-center"
+        cdkOverlayOrigin #trigger="cdkOverlayOrigin"
+        (click)="openUserOptions = !openUserOptions"
+        >
+          <p>{{userCurrent().email}}</p>
+        </button>
+
+        <ng-template
+          cdkConnectedOverlay
+          [cdkConnectedOverlayOrigin]="trigger"
+          [cdkConnectedOverlayOpen]="openUserOptions"
+        >
+          <ul class="example-list bg-white px-5 py-2">
+            <li class="cursor-pointer">Update</li>
+            <li class="text-lime-500 font-bold hover:text-lime-400 cursor-pointer" (click)="logOut()">Logout</li>
+          </ul>
+        </ng-template>
+      }
+
 
       <div class="flex items-center">
         <button class="p-2 relative">
@@ -56,3 +77,5 @@
     </div>
   </menu>
 </header>
+
+

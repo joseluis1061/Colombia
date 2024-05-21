@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { RouterLinkWithHref } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -14,17 +14,21 @@ import { Dialog } from '@angular/cdk/dialog';
 import { LoginComponent } from '../login/login.component';
 
 import { AuthService } from '../../../../services/auth.service';
+import { OverlayModule } from '@angular/cdk/overlay';
+
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FontAwesomeModule, RouterLinkWithHref, RouterModule],
+  imports: [FontAwesomeModule, RouterLinkWithHref, RouterModule, OverlayModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit{
   authService = inject(AuthService);
-  userState = {};
+  userCurrent = signal<any | null>(null);
+  openUserOptions: boolean = false;
   faCoffee = faCoffee;
   faHome = faHome;
   faTable = faTable;
@@ -38,10 +42,16 @@ export class HeaderComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    this.isAutenticated();
+
+  }
+
+  isAutenticated(){
     this.authService.isAuthenticated().subscribe({
-      next: (userState) => {
-        this.userState = userState;
-        console.log("User State: ", this.userState);
+      next: (userCurrent) => {
+        if(userCurrent){
+          this.userCurrent.set(userCurrent);
+        }
       }
     })
   }
@@ -59,5 +69,12 @@ export class HeaderComponent implements OnInit{
     dialogRef.closed.subscribe(output => {
       console.log(output);
     })
+  }
+
+  logOut(){
+    console.log("Salir")
+
+    this.authService.logout();
+    location.reload();
   }
 }
