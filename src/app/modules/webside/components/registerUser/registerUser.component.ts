@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DialogModule } from '@angular/cdk/dialog';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
+import { AuthService } from '../../../../services/auth.service';
 
 interface OutputData {
   rta: Boolean;
@@ -12,7 +13,7 @@ interface OutputData {
   selector: 'app-register-user',
   standalone: true,
   imports: [
-    CommonModule,
+    CommonModule, ReactiveFormsModule
   ],
   templateUrl: './registerUser.component.html',
   styles:`
@@ -52,26 +53,34 @@ interface OutputData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterUserComponent {
-  reservationForm: FormGroup = new FormGroup({});
+  authService = inject(AuthService);
+  registerForm: FormGroup = new FormGroup({});
 
   constructor(
     private dialogRef: DialogRef<OutputData>,
   ) {}
 
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.initFormParent();
+   }
 
   // Inicializa campos y define validaciones de formulario
   initFormParent(): void {
-    this.reservationForm = new FormGroup({
+    this.registerForm = new FormGroup({
       email: new FormControl('', Validators.email),
       password: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      rol: new FormControl('', [Validators.required]),
     });
   }
 
-  onSubmitLogin(){
-    console.log(this.reservationForm.value);
-    this.close();
+  onSubmitRegister(){
+
+    console.log(this.registerForm.value);
+    const register = this.authService.createUser(this.registerForm.value.email, this.registerForm.value.password)
+    console.log("Register: ", register);
+    //this.close();
   }
 
   close() {

@@ -28,18 +28,17 @@ export class AuthService {
     });
   }
 
-  createUser(email:string, password:string){
-    createUserWithEmailAndPassword(this.auth, email, password)
-    .then((userCredential) => {
+  async createUser(email:string, password:string){
+    try {
+      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
       // Signed in
       const user = userCredential.user;
-      console.log("Usuario logeado: ", user)
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      return user;
+    } catch (error) {
       console.log("Error de login: ", error);
-    });
+      // throw error;
+      return error;
+    }
   }
 
   async getUser(){
