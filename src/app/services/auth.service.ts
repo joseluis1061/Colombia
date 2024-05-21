@@ -45,6 +45,7 @@ export class AuthService {
           rol: userData.value.rol
         }
         const newCollection = this.firestoreService.crearColeccion('users', data);
+        console.log("NewCollection: ", newCollection)
       }
       return user;
     } catch (error) {
