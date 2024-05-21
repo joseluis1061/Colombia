@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
 import { DialogModule } from '@angular/cdk/dialog';
 import { DialogRef, Dialog, DIALOG_DATA } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
 import { RegisterUserComponent } from '../registerUser/registerUser.component';
+import { AuthService } from '../../../../services/auth.service';
 
 interface OutputData {
   rta: Boolean;
@@ -51,13 +52,14 @@ interface OutputData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
+
   loginForm: FormGroup = new FormGroup({});
+  authService = inject(AuthService);
 
   constructor(
     private dialogRef: DialogRef<OutputData>,
     private dialog: Dialog,
   ) {}
-
 
   ngOnInit(): void {
     this.initFormParent();
@@ -72,7 +74,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin(){
-    console.log(this.loginForm.value);
+    console.log(this.loginForm.value.email, this.loginForm.value.password);
+    this.authService.signInUser(this.loginForm.value.email, this.loginForm.value.password);
     this.close();
   }
 

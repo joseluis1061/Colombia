@@ -13,18 +13,11 @@ import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes), 
-    provideClientHydration(), 
-    provideHttpClient(withFetch()), 
-    /*
-    importProvidersFrom([
-      provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), 
-      provideAuth(() => getAuth()), 
-      provideStorage(() => getStorage())
-    ]),*/
-    
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), 
-    provideAuth(() => getAuth()), 
+    provideRouter(routes),
+    provideClientHydration(),
+    provideHttpClient(withFetch()),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore())
   ]
