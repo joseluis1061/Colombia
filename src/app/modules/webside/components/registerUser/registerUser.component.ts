@@ -77,8 +77,8 @@ export class RegisterUserComponent {
 
   onSubmitRegister(){
 
-    console.log(this.registerForm.value);
-    const register = this.authService.createUser(this.registerForm.value.email, this.registerForm.value.password)
+    // console.log(this.registerForm.value);
+    const register = this.authService.createUser(this.registerForm)
     console.log("Register: ", register);
     //this.close();
   }

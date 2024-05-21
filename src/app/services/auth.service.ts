@@ -2,12 +2,15 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { FirestoreService } from './firestore.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private firestoreService= inject(FirestoreService)
   private auth = inject(Auth);
   currentUser = signal({});
 
@@ -28,11 +31,21 @@ export class AuthService {
     });
   }
 
-  async createUser(email:string, password:string){
+  async createUser(userData:any){
     try {
-      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(this.auth, userData.value.email, userData.value.password);
       // Signed in
       const user = userCredential.user;
+      console.log('Register user success: ', user);
+      if(user){
+        const data = {
+          userUid: user.uid,
+          email: userData.value.email,
+          phone: userData.value.phone,
+          rol: userData.value.rol
+        }
+        const newCollection = this.firestoreService.crearColeccion('users', data);
+      }
       return user;
     } catch (error) {
       console.log("Error de login: ", error);
