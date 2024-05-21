@@ -72,8 +72,6 @@ export class HeaderComponent implements OnInit{
   }
 
   logOut(){
-    console.log("Salir")
-
     this.authService.logout();
     location.reload();
   }
