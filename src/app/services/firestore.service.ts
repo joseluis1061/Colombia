@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, getDocs, getFirestore } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, getDocs, getFirestore, setDoc } from '@angular/fire/firestore';
 import { error } from 'console';
 
 @Injectable({
@@ -12,10 +12,13 @@ export class FirestoreService {
   constructor() { }
 
   // Función para crear una colección
-  crearColeccion(nombreColeccion: string, datos: any) {
+  creteCollectionUser(nombreColeccion: string, datos: any) {
+    const path =  datos.userUid.toString();
     try{
-      const colRef = collection(this.firestore, nombreColeccion);
-      return addDoc(colRef, datos);
+      const docRef = doc(this.firestore, `${path}/${nombreColeccion}`);
+      return setDoc(docRef, datos);
+      // const colRef = collection(this.firestore, path, nombreColeccion);
+      //return addDoc(colRef, datos);
     }catch(error){
       return error;
     }
