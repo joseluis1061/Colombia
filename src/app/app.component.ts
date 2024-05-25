@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { FirestoreService } from './services/firestore.service';
 // import { Firestore, collection, collectionData, getDocs } from '@angular/fire/firestore';
 // import { Observable } from 'rxjs';
 
@@ -17,6 +18,7 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent implements OnInit{
   title = 'turismo-comunitario';
+  firestoreService = inject(FirestoreService);
   // firestore: Firestore = inject(Firestore);
   // item$!: Observable<Item[]>;
 
@@ -27,6 +29,6 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
-
+    this.firestoreService.getCollectionUser('qjstSW3DywYZPcDULIrDgeVdAWU2');
   }
 }

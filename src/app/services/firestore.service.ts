@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, getDocs, getFirestore, setDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, getDocs, getDoc, getFirestore, setDoc } from '@angular/fire/firestore';
 import { error } from 'console';
 
 @Injectable({
@@ -11,16 +11,29 @@ export class FirestoreService {
 
   constructor() { }
 
-  // Función para crear una colección
+  // Crear colección de usuarios
   creteCollectionUser(nombreColeccion: string, datos: any) {
     const path =  datos.userUid.toString();
     try{
-      const docRef = doc(this.firestore, `${path}/${nombreColeccion}`);
+      const docRef = doc(this.firestore, `${nombreColeccion}/${path}`);
       return setDoc(docRef, datos);
-      // const colRef = collection(this.firestore, path, nombreColeccion);
-      //return addDoc(colRef, datos);
     }catch(error){
       return error;
+    }
+  }
+
+  // Traer datos de usuario
+  async getCollectionUser(userId: string){
+    const db = getFirestore();
+
+    const docRef = doc(db, "users", `${userId}`);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log("No such document!");
     }
   }
 
