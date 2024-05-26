@@ -2,15 +2,18 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { collectionData, Firestore } from '@angular/fire/firestore';
 import { FirestoreService } from './firestore.service';
 import { Observable } from 'rxjs';
 import { Users, UsersExtended } from '../models/users.model';
+import { collection } from 'firebase/firestore';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private firestoreService= inject(FirestoreService)
+  private firestore = inject(Firestore);
+  private firestoreService= inject(FirestoreService);
   private auth = inject(Auth);
   currentUser = signal({});
 
@@ -68,6 +71,8 @@ export class AuthService {
     });
     return this.currentUser
   }
+
+
 
   // Función para verificar si hay un usuario logeado
   /*isAuthenticated() {
