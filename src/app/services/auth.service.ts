@@ -1,10 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { collectionData, Firestore } from '@angular/fire/firestore';
 import { FirestoreService } from './firestore.service';
-import { Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { Users, UsersExtended } from '../models/users.model';
 import { collection } from 'firebase/firestore';
 @Injectable({
@@ -88,6 +88,7 @@ export class AuthService {
     });
   }*/
 
+
   isAuthenticated(): Observable<UsersExtended | null> {
     return new Observable<UsersExtended | null>(observer => {
       onAuthStateChanged(this.auth, (user) => {
@@ -104,6 +105,8 @@ export class AuthService {
       });
     });
   }
+
+
 
   async logout() {
     try {

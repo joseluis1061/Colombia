@@ -16,10 +16,12 @@
         <a class="text-lg" [routerLink]="['/history']" type="button">History</a>
       </div>
 
-      <div class="flex items-center justify-between gap-4 hover:text-lime-600 transition-[300ms]">
-        <!-- <fa-icon class="text-[25px]" [icon]="faTable"></fa-icon> -->
-        <a class="text-lg" [routerLink]="['/admin']" type="button">Admin</a>
-      </div>
+      @if(userRole() === 'provider' || userRole() === 'admin'){
+        <div class="flex items-center justify-between gap-4 hover:text-lime-600 transition-[300ms]">
+          <!-- <fa-icon class="text-[25px]" [icon]="faTable"></fa-icon> -->
+          <a class="text-lg" [routerLink]="['/admin']" type="button">Admin</a>
+        </div>
+      }
 
       @if (userCurrent() === null) {
         <div

@@ -16,6 +16,8 @@ import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../../../services/auth.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 
+import { FirestoreService } from '../../../../services/firestore.service';
+
 import { Route } from '@angular/router';
 
 @Component({
@@ -26,8 +28,12 @@ import { Route } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit{
-  authService = inject(AuthService);
+  private firestoreService = inject(FirestoreService);
+  private authService = inject(AuthService);
   userCurrent = signal<any | null>(null);
+  userRole = signal<string>('user');
+
+
   openUserOptions: boolean = false;
   faCoffee = faCoffee;
   faHome = faHome;
@@ -43,15 +49,17 @@ export class HeaderComponent implements OnInit{
 
   ngOnInit(): void {
     this.isAutenticated();
-
   }
 
   isAutenticated(){
     this.authService.isAuthenticated().subscribe({
       next: (userCurrent) => {
         if(userCurrent){
-          console.log("HEADER userCurrent ", userCurrent)
           this.userCurrent.set(userCurrent);
+          const currentUser = this.firestoreService.getUser(userCurrent.uid).subscribe(
+            response => this.userRole.set(response.role)
+          )
+
         }
       }
     })
