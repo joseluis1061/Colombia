@@ -4,7 +4,7 @@ import { Auth } from '@angular/fire/auth';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { FirestoreService } from './firestore.service';
 import { Observable } from 'rxjs';
-
+import { Users, UsersExtended } from '../models/users.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,7 +42,7 @@ export class AuthService {
           userUid: user.uid,
           email: userData.value.email,
           phone: userData.value.phone,
-          rol: userData.value.rol
+          role: userData.value.role
         }
         const newCollection = this.firestoreService.creteCollectionUser('users', data);
         console.log("NewCollection: ", newCollection)
@@ -70,11 +70,28 @@ export class AuthService {
   }
 
   // Función para verificar si hay un usuario logeado
-  isAuthenticated(): Observable<any> {
+  /*isAuthenticated() {
     return new Observable(observer => {
-      onAuthStateChanged(this.auth, user => {
+      onAuthStateChanged(this.auth, (user) => {
         if (user) {
           observer.next(user);
+        } else {
+          observer.next(null);
+        }
+        observer.complete();
+      });
+    });
+  }*/
+
+  isAuthenticated(): Observable<UsersExtended | null> {
+    return new Observable<UsersExtended | null>(observer => {
+      onAuthStateChanged(this.auth, (user) => {
+        if (user) {
+          const userData: UsersExtended = {
+            uid: user.uid,
+            email: user.email,
+          };
+          observer.next(userData);
         } else {
           observer.next(null);
         }

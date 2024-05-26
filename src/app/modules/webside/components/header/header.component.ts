@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit{
     this.authService.isAuthenticated().subscribe({
       next: (userCurrent) => {
         if(userCurrent){
+          console.log("HEADER userCurrent ", userCurrent)
           this.userCurrent.set(userCurrent);
         }
       }

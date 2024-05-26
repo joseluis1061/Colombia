@@ -71,7 +71,7 @@ export class RegisterUserComponent {
       email: new FormControl('', Validators.email),
       password: new FormControl('', [Validators.required, Validators.minLength(5)]),
       phone: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      rol: new FormControl('', [Validators.required]),
+      role: new FormControl('', [Validators.required]),
     });
   }
 
