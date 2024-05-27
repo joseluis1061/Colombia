@@ -7,10 +7,12 @@ import { faPlane } from '@fortawesome/free-solid-svg-icons';
 import { faRoute } from '@fortawesome/free-solid-svg-icons';
 import { faPersonWalkingLuggage } from '@fortawesome/free-solid-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+
+import { MenuSimpleServiceComponent } from './components/menuSimpleService/menuSimpleService.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FontAwesomeModule, RouterLinkWithHref],
+  imports: [FontAwesomeModule, RouterLinkWithHref, MenuSimpleServiceComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
