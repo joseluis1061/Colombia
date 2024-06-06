@@ -55,6 +55,7 @@ interface OutputData {
 export class RegisterUserComponent {
   authService = inject(AuthService);
   registerForm: FormGroup = new FormGroup({});
+  typeRoleProvider: boolean = false;
 
   constructor(
     private dialogRef: DialogRef<OutputData>,
@@ -63,6 +64,7 @@ export class RegisterUserComponent {
 
   ngOnInit(): void {
     this.initFormParent();
+    this.subscribeRoleChanges();
    }
 
   // Inicializa campos y define validaciones de formulario
@@ -71,7 +73,34 @@ export class RegisterUserComponent {
       email: new FormControl('', Validators.email),
       password: new FormControl('', [Validators.required, Validators.minLength(5)]),
       phone: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      idIdetintification: new FormControl('', [Validators.required, Validators.minLength(8)]),
       role: new FormControl('', [Validators.required]),
+      nameService: new FormControl(''),
+      typeService: new FormControl(''),
+    });
+  }
+
+  // Suscribirse a los cambios del campo role
+  subscribeRoleChanges(): void {
+    this.registerForm.get('role')?.valueChanges.subscribe((roleValue) => {
+      const nameServiceControl = this.registerForm.get('nameService');
+      const typeServiceControl = this.registerForm.get('typeService');
+      if (roleValue === 'provider') {
+        console.log('El usuario seleccionó el rol de Proveedor');
+        this.typeRoleProvider = true;
+        // Añadir validadores
+        nameServiceControl?.setValidators([Validators.required]);
+        typeServiceControl?.setValidators([Validators.required]);
+      }else{
+        this.typeRoleProvider = false;
+        console.log("El role es usuario");
+        // Quitar validadores
+        nameServiceControl?.clearValidators();
+        typeServiceControl?.clearValidators();
+      }
+      // Actualizar el estado del control y lanzar la validación
+      nameServiceControl?.updateValueAndValidity();
+      typeServiceControl?.updateValueAndValidity();
     });
   }
 

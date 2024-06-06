@@ -45,7 +45,9 @@ export class AuthService {
           userUid: user.uid,
           email: userData.value.email,
           phone: userData.value.phone,
-          role: userData.value.role
+          role: userData.value.role,
+          nameService: userData.value.nameService,
+          typeService: userData.value.typeService
         }
         const newCollection = this.firestoreService.creteCollectionUser('users', data);
         console.log("NewCollection: ", newCollection)
