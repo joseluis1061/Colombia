@@ -30,5 +30,6 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.firestoreService.getCollectionUser('qjstSW3DywYZPcDULIrDgeVdAWU2');
+    
   }
 }
