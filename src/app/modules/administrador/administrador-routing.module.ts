@@ -9,8 +9,13 @@ const routes: Routes = [
     component: LayoutComponent,
     children:[
       {
-        path:'users',
-        component: UsersComponent
+        path: '',
+        redirectTo: '/admin/users',
+        pathMatch: 'full'
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
       }
     ]
   }
