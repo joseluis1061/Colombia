@@ -18,8 +18,6 @@ export class AuthService {
   currentUser = signal({});
 
 
-  constructor() { }
-
   signInUser(email:string, password:string){
     signInWithEmailAndPassword(this.auth, email, password)
     .then((userCredential) => {
@@ -47,7 +45,8 @@ export class AuthService {
           phone: userData.value.phone,
           role: userData.value.role,
           nameService: userData.value.nameService,
-          typeService: userData.value.typeService
+          typeService: userData.value.typeService,
+          statusActive: true
         }
         const newCollection = this.firestoreService.creteCollectionUser('users', data);
         console.log("NewCollection: ", newCollection)
