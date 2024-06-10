@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, type OnInit } from '@angular/core';
 import { DialogRef, Dialog, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
-import { StarRatingComponentComponent } from '../../../../../../shared/components/star-rating-component/star-rating-component.component';
+import { StarRatingComponent } from '../../../../../../shared/components/star-rating-component/star-rating-component.component';
 interface InputData {
   name: string;
 }
@@ -14,7 +14,7 @@ interface OutputData {
   selector: 'app-comment',
   standalone: true,
   imports: [
-    CommonModule, DialogModule, ReactiveFormsModule, StarRatingComponentComponent
+    CommonModule, DialogModule, ReactiveFormsModule, StarRatingComponent
   ],
   templateUrl: `./comment.component.html`,
   styles:`

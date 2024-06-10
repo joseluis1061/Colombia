@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-star-rating-component',
+  selector: 'app-star-rating',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './star-rating-component.component.html'
+  templateUrl: './star-rating.component.html'
 })
-export class StarRatingComponentComponent implements OnInit{
+export class StarRatingComponent implements OnInit{
   @Input() averageRating: number = 0;
   @Output() ratingChange = new EventEmitter<number>();
 

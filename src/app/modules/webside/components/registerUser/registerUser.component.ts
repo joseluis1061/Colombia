@@ -24,7 +24,7 @@ interface OutputData {
     /* padding: 8px 16px; */
     margin: 0 auto;
     max-height: 100vh;
-    width: 90%;
+    width: 95%;
     min-width: 100vw;
     margin: 0 auto;
     right: 0;
@@ -36,6 +36,11 @@ interface OutputData {
     div.cdk-overlay-container > div.cdk-global-overlay-wrapper{
       justify-content: flex-start!important;
     }
+
+    #cdk-overlay-1{
+     max-width:90%;
+     border: none
+    }
   }
 
   @media (min-width: 768px) {
@@ -43,11 +48,20 @@ interface OutputData {
       min-width: unset;
       width: 100%;
     }
+
     ::ng-deep{
-    div.cdk-overlay-container > div.cdk-global-overlay-wrapper{
-      justify-content: center!important;
+      div.cdk-overlay-container > div.cdk-global-overlay-wrapper{
+        justify-content: center!important;
+      }
     }
-  }
+
+    ::ng-deep{
+      div.cdk-overlay-pane{
+        max-width:70%!important;
+        width: 70%!important;
+      }
+    }
+
   }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -64,7 +78,6 @@ export class RegisterUserComponent {
 
   ngOnInit(): void {
     this.initFormParent();
-    this.subscribeRoleChanges();
    }
 
   // Inicializa campos y define validaciones de formulario
@@ -77,7 +90,9 @@ export class RegisterUserComponent {
       role: new FormControl('', [Validators.required]),
       nameService: new FormControl(''),
       typeService: new FormControl(''),
+      image: new FormControl(null, [Validators.required])
     });
+    this.subscribeRoleChanges();
   }
 
   // Suscribirse a los cambios del campo role
@@ -102,6 +117,15 @@ export class RegisterUserComponent {
       nameServiceControl?.updateValueAndValidity();
       typeServiceControl?.updateValueAndValidity();
     });
+  }
+
+  onFileChange(event: any): void {
+    if (event.target.files && event.target.files.length) {
+      const file = event.target.files[0];
+      this.registerForm.patchValue({
+        image: file
+      });
+    }
   }
 
   onSubmitRegister(){

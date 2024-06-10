@@ -2,11 +2,12 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
-import { collectionData, Firestore } from '@angular/fire/firestore';
+import { getStorage, ref } from "firebase/storage";
+import { getApp } from "firebase/app";
+import { Firestore } from '@angular/fire/firestore';
 import { FirestoreService } from './firestore.service';
-import { from, Observable, of } from 'rxjs';
-import { Users, UsersExtended } from '../models/users.model';
-import { collection } from 'firebase/firestore';
+import { Observable, of } from 'rxjs';
+import { UsersExtended } from '../models/users.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -33,6 +34,8 @@ export class AuthService {
   }
 
   async createUser(userData:any){
+    console.log("Image: ", userData.value.image)
+
     try {
       const userCredential = await createUserWithEmailAndPassword(this.auth, userData.value.email, userData.value.password);
       // Signed in
@@ -46,7 +49,8 @@ export class AuthService {
           role: userData.value.role,
           nameService: userData.value.nameService,
           typeService: userData.value.typeService,
-          statusActive: true
+          statusActive: true,
+          //image: userData.value.image
         }
         const newCollection = this.firestoreService.creteCollectionUser('users', data);
         console.log("NewCollection: ", newCollection)
