@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CardFoodComponent } from '../card-food/card-food.component';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { StarRatingComponentComponent } from '../../../../../../shared/components/star-rating-component/star-rating-component.component';
+import { StarRatingComponent } from '../../../../../../shared/components/star-rating-component/star-rating-component.component';
 import { UsersService } from '../../../../../../services/users.service';
 import { RootObject, UserModel } from '../../../../../../models/user.model';
 
@@ -14,7 +14,7 @@ import { Dialog, DialogModule } from '@angular/cdk/dialog';
 @Component({
   selector: 'app-restaurant',
   standalone: true,
-  imports: [CommonModule, CardFoodComponent, FontAwesomeModule, StarRatingComponentComponent, DialogModule],
+  imports: [CommonModule, CardFoodComponent, FontAwesomeModule, StarRatingComponent, DialogModule],
   templateUrl: './restaurant.component.html',
   // providers: [StarRatingConfigService]
 })
