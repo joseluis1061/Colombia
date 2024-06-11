@@ -11,11 +11,11 @@ const routes: Routes = [
     children:[
       {
         path: '',
-        redirectTo: '/admin/myUser',
+        redirectTo: '/admin/myuser',
         pathMatch: 'full'
       },
       {
-        path: 'myUser',
+        path: 'myuser',
         component: MyUserComponent,
       },
       {
