@@ -1,30 +1,3 @@
 <section class="h-full w-full p-0">
-  <div class="flex items-center justify-between gap-5 bg-white drop-shadow-md rounded-lg p-1.5">
-    <div class="flex flex-col justify-start items-center">
-      <div class="relative">
-        <img
-          class="w-28 h-28 rounded-full border-4 border-slate-50 object-cover"
-          src="../../../../../assets/img/users/user.jpg" alt="image profile"
-        />
-        <button type="button" class="absolute -right-5 bottom-0 p-3 h-10 rounded flex justify-center items-center text-lg text-blue-950 hover:text-blue-700">
-          <fa-icon class="" [icon]="faPencil"></fa-icon>
-        </button>
-      </div>
-      <p class="font-bold text-blue-950">{{"Pedro Perez"}}</p>
-      </div>
-    <div>
-      <p>Documento {{"2569987331"}}</p>
-      <p>{{"correo@correo.com"}}</p>
-      <p>{{"319655562278"}}</p>
-    </div>
-    <div>
-      <app-star-rating></app-star-rating>
-      <p>Reservaciones: {{150}}</p>
-      <p>{{"Timbio - Cauca"}}</p>
-      <p>{{"Panamericana Km 28 via Popayan - Pasto"}}</p>
-    </div>
-    <div class="h-[150px] w-2/5 overflow-hidden rounded">
-      <img class="object-cover" src="../../../../../assets/img/ricky-beron-80-c_rKa75Q-unsplash.jpg" alt="lugar place">
-    </div>
-  </div>
+  <app-user-baner></app-user-baner>
 </section>
