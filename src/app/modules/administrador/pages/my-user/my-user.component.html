@@ -5,47 +5,375 @@
     <h2 class="text-blue-950 font-bold text-xl">Tus servicios</h2>
     <nav class="flex items-center justify-between gap-5 w-full mt-3">
       <div class="flex gap-5">
-        <li class="list-none"><button type="button" class="border border-blue-900 px-3 py-2 rounded hover:bg-blue-950 hover:text-white transition-colors duration-500 ease-in-out">Restaurante</button></li>
-        <li class="list-none"><button type="button" class="border border-blue-900 px-3 py-2 rounded hover:bg-blue-950 hover:text-white transition-colors duration-500 ease-in-out">Hotel</button></li>
-        <li class="list-none"><button type="button" class="border border-blue-900 px-3 py-2 rounded hover:bg-blue-950 hover:text-white transition-colors duration-500 ease-in-out">Tour</button></li>
+        <li class="list-none">
+          <button
+            type="button"
+            class="border border-blue-900 px-3 py-2 rounded hover:bg-blue-950 hover:text-white transition-colors duration-500 ease-in-out"
+          >
+            Restaurante
+          </button>
+        </li>
+        <li class="list-none">
+          <button
+            type="button"
+            class="border border-blue-900 px-3 py-2 rounded hover:bg-blue-950 hover:text-white transition-colors duration-500 ease-in-out"
+          >
+            Hotel
+          </button>
+        </li>
+        <li class="list-none">
+          <button
+            type="button"
+            class="border border-blue-900 px-3 py-2 rounded hover:bg-blue-950 hover:text-white transition-colors duration-500 ease-in-out"
+          >
+            Tour
+          </button>
+        </li>
       </div>
 
       <div class="flex gap-5">
-        <li class="list-none"><button type="button" class="px-3 py-2 rounded bg-green-600 text-white hover:bg-green-500 hover:text-bold transition-colors duration-500 ease-in-out">Agregar</button></li>
-        <li class="list-none"><button type="button" class="px-3 py-2 rounded bg-red-700 text-white hover:bg-red-500 hover:text-bold transition-colors duration-500 ease-in-out">Eliminar</button></li>
+        <li class="list-none">
+          <button
+            type="button"
+            class="px-3 py-2 rounded bg-green-600 text-white hover:bg-green-500 hover:text-bold transition-colors duration-500 ease-in-out"
+          >
+            Agregar
+          </button>
+        </li>
+        <li class="list-none">
+          <button
+            type="button"
+            class="px-3 py-2 rounded bg-red-700 text-white hover:bg-red-500 hover:text-bold transition-colors duration-500 ease-in-out"
+          >
+            Eliminar
+          </button>
+        </li>
       </div>
     </nav>
   </div>
 
   <div class="bg-white drop-shadow-md rounded-lg py-1.5 px-2 mt-5">
     <h2 class="text-blue-950 font-bold text-xl">Restaurante donde la abuela</h2>
-      <div class="flex flex-col gap-4 mt-3">
-        <p>En el corazón de una pintoresca casa colonial colombiana, se encuentra un restaurante que es un tesoro escondido para los amantes de la auténtica cocina colombiana. Restaurante La Abuela te invita a un viaje culinario a través de sus platos típicos, cada uno cocinado lentamente sobre leña, lo que les infunde un sabor ahumado y una textura inigualable que evoca la tradición y el calor de hogar. Las paredes de adobe y las vigas de madera se alzan como testigos mudos de historias y risas compartidas, mientras que los aromas de arepas de choclo, bandeja paisa y sancocho traspasan el aire, prometiendo una experiencia gastronómica que es tanto un festín para el paladar como un homenaje a la rica herencia cultural de Colombia.</p>
-      </div>
-      <div class="flex justify-end gap-5 w-full">
-        <li class="list-none"><button type="button" class="min-w-[80px] px-3 py-2 rounded bg-green-600 text-white hover:bg-green-500 hover:text-bold transition-colors duration-500 ease-in-out">Editar</button></li>
-        <li class="list-none"><button type="button" class="min-w-[80px] px-3 py-2 rounded bg-red-700 text-white hover:bg-red-500 hover:text-bold transition-colors duration-500 ease-in-out">Eliminar</button></li>
-      </div>
+    <div class="flex flex-col gap-4 mt-3">
+      <p>
+        En el corazón de una pintoresca casa colonial colombiana, se encuentra
+        un restaurante que es un tesoro escondido para los amantes de la
+        auténtica cocina colombiana. Restaurante La Abuela te invita a un viaje
+        culinario a través de sus platos típicos, cada uno cocinado lentamente
+        sobre leña, lo que les infunde un sabor ahumado y una textura
+        inigualable que evoca la tradición y el calor de hogar. Las paredes de
+        adobe y las vigas de madera se alzan como testigos mudos de historias y
+        risas compartidas, mientras que los aromas de arepas de choclo, bandeja
+        paisa y sancocho traspasan el aire, prometiendo una experiencia
+        gastronómica que es tanto un festín para el paladar como un homenaje a
+        la rica herencia cultural de Colombia.
+      </p>
+    </div>
+    <div class="flex justify-end gap-5 w-full">
+      <li class="list-none">
+        <button
+          type="button"
+          class="min-w-[80px] px-3 py-2 rounded bg-green-600 text-white hover:bg-green-500 hover:text-bold transition-colors duration-500 ease-in-out"
+        >
+          Editar
+        </button>
+      </li>
+      <li class="list-none">
+        <button
+          type="button"
+          class="min-w-[80px] px-3 py-2 rounded bg-red-700 text-white hover:bg-red-500 hover:text-bold transition-colors duration-500 ease-in-out"
+        >
+          Eliminar
+        </button>
+      </li>
+    </div>
   </div>
 
   <div class="bg-white drop-shadow-md rounded-lg py-1.5 px-2 mt-5">
     <h2 class="text-blue-950 font-bold text-xl">Imagenes de presentación</h2>
     <div class="flex mt-5 gap-5">
-      <img class="w-1/4 rounded h-[150px]" src="../../../../../assets/img/restaurant/restaurant_1.jpg" alt="banner1">
-      <img class="w-1/4 rounded h-[150px]" src="../../../../../assets/img/restaurant/restaurant_2.jpg" alt="banner2">
-      <img class="w-1/4 rounded h-[150px]" src="../../../../../assets/img/restaurant/restaurant_3.jpg" alt="banner3">
-      <img class="w-1/4 rounded h-[150px]" src="../../../../../assets/img/restaurant/restaurant_4.jpg" alt="banner4">
+      <img
+        class="w-1/4 rounded h-[150px]"
+        src="../../../../../assets/img/restaurant/restaurant_1.jpg"
+        alt="banner1"
+      />
+      <img
+        class="w-1/4 rounded h-[150px]"
+        src="../../../../../assets/img/restaurant/restaurant_2.jpg"
+        alt="banner2"
+      />
+      <img
+        class="w-1/4 rounded h-[150px]"
+        src="../../../../../assets/img/restaurant/restaurant_3.jpg"
+        alt="banner3"
+      />
+      <img
+        class="w-1/4 rounded h-[150px]"
+        src="../../../../../assets/img/restaurant/restaurant_4.jpg"
+        alt="banner4"
+      />
     </div>
+
     <div class="flex justify-end gap-5 w-full mt-4">
-      <li class="list-none"><button type="button" class="min-w-[80px] px-3 py-2 rounded bg-green-600 text-white hover:bg-green-500 hover:text-bold transition-colors duration-500 ease-in-out">Editar</button></li>
-      <li class="list-none"><button type="button" class="min-w-[80px] px-3 py-2 rounded bg-red-700 text-white hover:bg-red-500 hover:text-bold transition-colors duration-500 ease-in-out">Eliminar</button></li>
+      <li class="list-none">
+        <button
+          type="button"
+          class="min-w-[80px] px-3 py-2 rounded bg-green-600 text-white hover:bg-green-500 hover:text-bold transition-colors duration-500 ease-in-out"
+        >
+          Editar
+        </button>
+      </li>
+      <li class="list-none">
+        <button
+          type="button"
+          class="min-w-[80px] px-3 py-2 rounded bg-red-700 text-white hover:bg-red-500 hover:text-bold transition-colors duration-500 ease-in-out"
+        >
+          Eliminar
+        </button>
+      </li>
     </div>
   </div>
 
   <div class="bg-white drop-shadow-md rounded-lg py-1.5 px-2 mt-5">
     <h2 class="text-blue-950 font-bold text-xl">Lista de productos</h2>
-    <table>
 
+    <table
+      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    >
+      <thead
+        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      >
+        <tr>
+          <th scope="col" class="p-4">
+            <div class="flex items-center">
+              <input
+                id="checkbox-all-search"
+                type="checkbox"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label for="checkbox-all-search" class="sr-only">checkbox</label>
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">Imagen</th>
+          <th scope="col" class="px-6 py-3">Tipo</th>
+          <th scope="col" class="px-6 py-3">Descripción</th>
+          <th scope="col" class="px-6 py-3">Cantidad de personas</th>
+          <th scope="col" class="px-6 py-3">Precio sin iva</th>
+          <th scope="col" class="px-6 py-3">Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+      >
+        <td class="w-4 p-4">
+          <div class="flex items-center">
+            <input
+              id="checkbox-table-search-1"
+              type="checkbox"
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            />
+            <label for="checkbox-table-search-1" class="sr-only"
+              >checkbox</label
+            >
+          </div>
+        </td>
+        <th
+          scope="row"
+          class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          <img
+            class="w-10 h-10"
+            src="../../../../../assets/img/restaurant/bandeja.jpg"
+            alt="Bandeja"
+          />
+          <div class="ps-3">
+            <div class="text-base font-semibold">Bandeja paisa</div>
+          </div>
+        </th>
+        <td class="px-6 py-4">Almuerzo / Cena</td>
+        <td class="px-6 py-4">Un plato generoso y variado, que combina sabrosos frijoles antioqueños, chicharrón crujiente, carne molida sazonada, plátano maduro, huevo frito, arepa, chorizo, morcilla y aguacate.</td>
+        <td class="px-6 py-4">1</td>
+        <td class="px-6 py-4">$ {{"45000"}}</td>
+        <td class="px-6 py-4">
+          <a
+            href="#"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          >
+            Editar
+          </a>
+        </td>
+      </tr>
+
+      <tr
+      class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+    >
+      <td class="w-4 p-4">
+        <div class="flex items-center">
+          <input
+            id="checkbox-table-search-1"
+            type="checkbox"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label for="checkbox-table-search-1" class="sr-only"
+            >checkbox</label
+          >
+        </div>
+      </td>
+      <th
+        scope="row"
+        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+      >
+        <img
+          class="w-10 h-10"
+          src="../../../../../assets/img/restaurant/bandeja.jpg"
+          alt="Bandeja"
+        />
+        <div class="ps-3">
+          <div class="text-base font-semibold">Bandeja paisa</div>
+        </div>
+      </th>
+      <td class="px-6 py-4">Almuerzo / Cena</td>
+      <td class="px-6 py-4">Un plato generoso y variado, que combina sabrosos frijoles antioqueños, chicharrón crujiente, carne molida sazonada, plátano maduro, huevo frito, arepa, chorizo, morcilla y aguacate.</td>
+      <td class="px-6 py-4">1</td>
+      <td class="px-6 py-4">$ {{"45000"}}</td>
+      <td class="px-6 py-4">
+        <a
+          href="#"
+          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+        >
+          Editar
+        </a>
+      </td>
+    </tr>
+
+    <tr
+    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+  >
+    <td class="w-4 p-4">
+      <div class="flex items-center">
+        <input
+          id="checkbox-table-search-1"
+          type="checkbox"
+          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label for="checkbox-table-search-1" class="sr-only"
+          >checkbox</label
+        >
+      </div>
+    </td>
+    <th
+      scope="row"
+      class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+    >
+      <img
+        class="w-10 h-10"
+        src="../../../../../assets/img/restaurant/bandeja.jpg"
+        alt="Bandeja"
+      />
+      <div class="ps-3">
+        <div class="text-base font-semibold">Bandeja paisa</div>
+      </div>
+    </th>
+    <td class="px-6 py-4">Almuerzo / Cena</td>
+    <td class="px-6 py-4">Un plato generoso y variado, que combina sabrosos frijoles antioqueños, chicharrón crujiente, carne molida sazonada, plátano maduro, huevo frito, arepa, chorizo, morcilla y aguacate.</td>
+    <td class="px-6 py-4">1</td>
+    <td class="px-6 py-4">$ {{"45000"}}</td>
+    <td class="px-6 py-4">
+      <a
+        href="#"
+        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      >
+        Editar
+      </a>
+    </td>
+  </tr>
+
+  <tr
+  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+>
+  <td class="w-4 p-4">
+    <div class="flex items-center">
+      <input
+        id="checkbox-table-search-1"
+        type="checkbox"
+        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+      />
+      <label for="checkbox-table-search-1" class="sr-only"
+        >checkbox</label
+      >
+    </div>
+  </td>
+  <th
+    scope="row"
+    class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+  >
+    <img
+      class="w-10 h-10"
+      src="../../../../../assets/img/restaurant/bandeja.jpg"
+      alt="Bandeja"
+    />
+    <div class="ps-3">
+      <div class="text-base font-semibold">Bandeja paisa</div>
+    </div>
+  </th>
+  <td class="px-6 py-4">Almuerzo / Cena</td>
+  <td class="px-6 py-4">Un plato generoso y variado, que combina sabrosos frijoles antioqueños, chicharrón crujiente, carne molida sazonada, plátano maduro, huevo frito, arepa, chorizo, morcilla y aguacate.</td>
+  <td class="px-6 py-4">1</td>
+  <td class="px-6 py-4">$ {{"45000"}}</td>
+  <td class="px-6 py-4">
+    <a
+      href="#"
+      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+    >
+      Editar
+    </a>
+  </td>
+</tr>
+
+        <tr
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+        >
+          <td class="w-4 p-4">
+            <div class="flex items-center">
+              <input
+                id="checkbox-table-search-1"
+                type="checkbox"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label for="checkbox-table-search-1" class="sr-only"
+                >checkbox</label
+              >
+            </div>
+          </td>
+          <th
+            scope="row"
+            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            <img
+              class="w-10 h-10"
+              src="../../../../../assets/img/restaurant/bandeja.jpg"
+              alt="Bandeja"
+            />
+            <div class="ps-3">
+              <div class="text-base font-semibold">Bandeja paisa</div>
+            </div>
+          </th>
+          <td class="px-6 py-4">Almuerzo / Cena</td>
+          <td class="px-6 py-4">Un plato generoso y variado, que combina sabrosos frijoles antioqueños, chicharrón crujiente, carne molida sazonada, plátano maduro, huevo frito, arepa, chorizo, morcilla y aguacate.</td>
+          <td class="px-6 py-4">1</td>
+          <td class="px-6 py-4">$ {{"45000"}}</td>
+          <td class="px-6 py-4">
+            <a
+              href="#"
+              class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            >
+              Editar
+            </a>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </section>
