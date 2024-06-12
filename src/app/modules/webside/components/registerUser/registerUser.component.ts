@@ -131,7 +131,8 @@ export class RegisterUserComponent {
   onSubmitRegister(){
 
     // console.log(this.registerForm.value);
-    const register = this.authService.createUser(this.registerForm)
+    //const register = this.authService.createUser(this.registerForm);
+    const register = this.authService.registerUser(this.registerForm);
     console.log("Register: ", register);
     //this.close();
   }
