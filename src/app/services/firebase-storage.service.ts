@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getApp } from "firebase/app";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, uploadBytes } from "firebase/storage";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class FirebaseStorageService {
   // Create a root reference
   storage = getStorage();
 
-  userImagePerfil(file: any, uid: string){
+  async userImagePerfil(file: any, uid: string){
     console.log("File: ", file);
     // Referencia donde sube el archivo
     const storageRef = ref(this.storage, `imgStorage/${uid}/${file.name}`);
@@ -43,4 +43,19 @@ export class FirebaseStorageService {
       }
     )
   }
+
+  async uploadFile(filePath: string, file: File): Promise<string> {
+    const fileRef = ref(this.storage, filePath);
+    const imageUpload = file;
+    console.log("Image upload: ", imageUpload);
+    try{
+      const snapshot = uploadBytes(fileRef, file);
+      const downloadURL = await getDownloadURL((await snapshot).ref);
+      return downloadURL;
+    }catch(error){
+      throw new Error('Failed upload file')
+    }
+
+  }
+
 }

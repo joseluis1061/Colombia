@@ -90,7 +90,7 @@ export class RegisterUserComponent {
       role: new FormControl('', [Validators.required]),
       nameService: new FormControl(''),
       typeService: new FormControl(''),
-      image: new FormControl(null, [Validators.required])
+      // image: new FormControl(null, [Validators.required])
     });
     this.subscribeRoleChanges();
   }
@@ -125,6 +125,7 @@ export class RegisterUserComponent {
       this.registerForm.patchValue({
         image: file
       });
+      console.log("IMAGEN FORM: ", file)
     }
   }
 
@@ -132,7 +133,8 @@ export class RegisterUserComponent {
 
     // console.log(this.registerForm.value);
     //const register = this.authService.createUser(this.registerForm);
-    const register = this.authService.registerUser(this.registerForm);
+    console.log("Image Submit: ",this.registerForm.value.image)
+    const register = this.authService.register(this.registerForm);
     console.log("Register: ", register);
     //this.close();
   }

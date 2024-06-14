@@ -9,7 +9,7 @@ import { FirestoreService } from './firestore.service';
 import { Observable, from, of } from 'rxjs';
 import { UsersExtended } from '../models/users.model';
 
-
+import { FirebaseStorageService } from './firebase-storage.service';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -22,6 +22,7 @@ export class AuthService {
 
   private firestore = inject(Firestore);
   private firestoreService= inject(FirestoreService);
+  private firebaseStorageService = inject(FirebaseStorageService);
   private storage = getStorage();
   private auth = inject(Auth);
   currentUser = signal({});
@@ -72,76 +73,43 @@ export class AuthService {
     }
   }
 
+  async register(userData: any): Promise<void> {
+    try {
+      // Create user
+      const userCredential = await createUserWithEmailAndPassword(this.auth, userData.value.email, userData.value.password);
+      const userId = userCredential.user?.uid;
+      const image = userData.value.image;
+      console.log(userData)
 
+      if (userId) {
+        //const filePath = `images/users/${userId}/profile.jpg`;
+        try {
 
-  registerUser(user: any): Observable<any>{
-    return from(createUserWithEmailAndPassword(this.auth, user.value.email, user.value.password)).pipe(
-      switchMap((userCredential) => {
-        if (!userCredential.user) {
-          console.log("Error de autenticación 1");
-          throw new Error('No se pudo crear el usuario');
+          const data = {
+            userUid: userId,
+            email: userData.value.email,
+            phone: userData.value.phone,
+            role: userData.value.role,
+            nameService: userData.value.nameService,
+            typeService: userData.value.typeService,
+            statusActive: true,
+            //image: userData.value.image
+          }
+          const newCollection = this.firestoreService.creteCollectionUser('users', data);
+          //const downloadURL = await this.firebaseStorageService.uploadFile(filePath, userData.value.image);
+          // Save downloadURL to user's profile or Firestore if needed
+        } catch (error) {
+          // Handle failure in file upload
+          await userCredential.user?.delete();
+          throw new Error('Failed to upload image. Please try again.');
         }
-
-        const uid = userCredential.user.uid;
-        const userData = {
-          email: user.email,
-          phone: user.phone,
-          idIdentification: user.idIdentification,
-          role: user.role,
-          nameService: user.role === 'provider' ? user.nameService : '',
-          typeService: user.role === 'provider' ? user.typeService : '',
-        };
-
-        const docRef = doc(this.firestore, `${'users'}/${uid}`);
-
-        return from(setDoc(docRef, userData)).pipe(
-          switchMap(() => {
-            if (user.role === 'provider') {
-              // Crear el documento en la colección 'servicios'
-              console.log("provider registro")
-              const serviceData = {
-                uid: uid,
-                nameService: user.nameService,
-                typeService: user.typeService
-              };
-
-              const docRefServices = doc(this.firestore, `${'services'}/${uid}`);
-              return from(setDoc(docRefServices, docRefServices)).pipe(
-                switchMap(() => {
-                  if (user.image) {
-                    // Subir la imagen al storage si el rol es provider
-                    const filePath = `images/users/${uid}/${user.image.name}`;
-                    const fileRef = ref(this.storage, filePath);
-                    return from(uploadBytes(fileRef,user.image)).pipe(
-                      switchMap(() => {
-                        return from(getDownloadURL(fileRef)).pipe(
-                          switchMap((download)=>{
-                            if(download){
-                              const docRef = doc(this.firestore, `${'users'}/${uid}`);
-                              return setDoc(docRef, userData)
-                            }else{
-                              console.log("Error de autenticación 8");
-
-                              return from(Promise.resolve(null));
-                            }
-                          })
-                        )
-                      })
-                    )
-                  }else{
-                    console.log("Error de autenticación 9");
-
-                    return from(Promise.resolve(null));
-                  }
-              }))
-            } else {
-              console.log("Error de autenticación 10");
-
-              return from(Promise.resolve(null));
-            }
-          }))
-      }))
+      }
+    } catch (error) {
+      throw error;
+    }
   }
+
+
 
   async getUser(){
     onAuthStateChanged(this.auth, (user) => {
