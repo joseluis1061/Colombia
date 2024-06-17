@@ -25,6 +25,16 @@ export interface UserModel {
   nat: string;
 }
 
+export interface IDataUser{
+  userUid: string;
+  email: string;
+  phone: string;
+  role: string;
+  nameService: string;
+  typeService: string;
+  statusActive: true;
+}
+
 export interface Picture {
   large: string;
   medium: string;

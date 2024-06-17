@@ -4,6 +4,7 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
+import { Router } from '@angular/router';
 
 interface OutputData {
   rta: Boolean;
@@ -68,8 +69,10 @@ interface OutputData {
 })
 export class RegisterUserComponent {
   authService = inject(AuthService);
+  router = inject(Router);
   registerForm: FormGroup = new FormGroup({});
   typeRoleProvider: boolean = false;
+
 
   constructor(
     private dialogRef: DialogRef<OutputData>,
@@ -119,6 +122,7 @@ export class RegisterUserComponent {
     });
   }
 
+
   onFileChange(event: any): void {
     if (event.target.files && event.target.files.length) {
       const file = event.target.files[0];
@@ -129,13 +133,26 @@ export class RegisterUserComponent {
     }
   }
 
-  onSubmitRegister(){
+  async onSubmitRegister(){
 
-    // console.log(this.registerForm.value);
     //const register = this.authService.createUser(this.registerForm);
-    console.log("Image Submit: ",this.registerForm.value.image)
-    const register = this.authService.register(this.registerForm);
-    console.log("Register: ", register);
+    //console.log("Image Submit: ",this.registerForm.value.image)
+
+    const register = await this.authService.register(this.registerForm);
+    console.log("REGISTER COMPONENT: ", register);
+    if(register.success === true){
+      if(register.data.role === "provider"){
+        console.log("Usuario creado Provider")
+        this.close();
+        this.router.navigate(["/admin"]);
+        return;
+      }
+        console.log("Creado tipo usuario");
+        this.close();
+        //this.router.navigate(["/userProfile"])
+        return
+    }
+    alert(`Algo salio mal: ${register.error}`)
     //this.close();
   }
 

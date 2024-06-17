@@ -6,6 +6,10 @@ import { Users } from '../models/users.model';
 import { Observable, from, map, of } from 'rxjs';
 import { user } from '@angular/fire/auth';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
+
+import { IDataUser } from '../models/user.model';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,13 +20,14 @@ export class FirestoreService {
   constructor() { }
 
   // Crear colección de usuarios
-  creteCollectionUser(nombreColeccion: string, datos: any) {
+  async creteCollectionUser(nombreColeccion: string, datos: IDataUser) {
     const path =  datos.userUid.toString();
     try{
       const docRef = doc(this.firestore, `${nombreColeccion}/${path}`);
-      return setDoc(docRef, datos);
+      await setDoc(docRef, datos);
+      return { success: true, data: datos };
     }catch(error){
-      return error;
+      return { success: false, error: 'Failed to create user document.', details: error };
     }
   }
 
