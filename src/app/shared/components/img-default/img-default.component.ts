@@ -9,16 +9,18 @@ import { CommonModule } from '@angular/common';
 })
 export class ImgDefaultComponent {
   img:string = '';
+  imgDefalult = './assets/images/default.png';
+
   @Input('img') set onChangeImg(img:string){
     this.img = img;
   }
+
   @Output() loader = new EventEmitter<string>();
-  imgDefalult = './assets/images/default.png';
-  contador:number = 0;
-  counterFn : number | undefined;
+
   imageError(){
     this.img = this.imgDefalult;
   }
+
   imageLoad(img:string){
     console.log("Desde el hijo ", img);
     this.loader.emit(`imgUrl: ${img}`);
