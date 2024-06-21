@@ -1,6 +1,19 @@
-<div>
-  <header>
+<div class="layout">
+  <header class="header">
     <h4 routerLink="/home"><span class="font-bold text-xl"><</span> ViajukoWeb</h4>
+
+    <nav class="header__nav flex justify-center items-center gap-5">
+      <li class="header__notification list-none">
+
+        <button type="button" class="bg-transparent text-white font-bold border border-white hover:bg-white hover:text-black delay-500 transition-all px-4 py-2 rounded-xl">
+          Anunciar Evento
+        </button>
+      </li>
+
+      <li class="header__notification list-none cursor-pointer">
+        <fa-icon class="text-[25px] text-white" [icon]="faBell"></fa-icon>
+      </li>
+    </nav>
   </header>
   <nav>
     <ul>
