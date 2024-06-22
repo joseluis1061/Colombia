@@ -16,12 +16,16 @@ export const adminRoleGuard: CanActivateFn = async (route, state) => {
         currentUser = userCurrent;
         if (currentUser) {
           firestoreService.getUser(currentUser.uid).subscribe({
-            next: response => console.log("Get User: ", response)
+            next: (response) => {
+              authService.currentUser.set(response);
+              console.log("Get User: ", response);
+            }
           })
           const response = await firestoreService.getCollectionUser(currentUser.uid);
           return response?.role === "provider";
         }
       }
+      authService.currentUser.set({});
       return false;
     } catch (error) {
       console.log("CurrentUser guard error: ", error);

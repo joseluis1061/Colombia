@@ -17,7 +17,7 @@ export class AuthService {
 
   private firestoreService= inject(FirestoreService);
   private auth = inject(Auth);
-  currentUser = signal({});
+  currentUser = signal<IUserAuthPartial>({});
 
 
   signInUser(email:string, password:string){
@@ -76,12 +76,16 @@ export class AuthService {
   }
 
 
+  setCurrentUser( userData:IUserAuthPartial){
+    console.log("UserData: ", userData);
+    this.currentUser.set(userData)
+  }
 
   async getUser(){
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         const uid = user.uid;
-        this.currentUser.set(user);
+        //this.currentUser.set(user);
         return this.currentUser;
       } else {
         console.log("Sin USUARIO");

@@ -30,6 +30,7 @@ import { Route } from '@angular/router';
 export class HeaderComponent implements OnInit{
   private firestoreService = inject(FirestoreService);
   private authService = inject(AuthService);
+  currentUser = this.authService.currentUser;
   userCurrent = signal<any | null>(null);
   userRole = signal<string>('user');
 
@@ -58,8 +59,9 @@ export class HeaderComponent implements OnInit{
           this.userCurrent.set(userCurrent);
           const currentUser = this.firestoreService.getUser(userCurrent.uid).subscribe(
             response => {
-              this.userRole.set(response.role || "user")
-              sessionStorage.setItem('user', JSON.stringify(response || {}))
+              this.userRole.set(response.role || "user");
+              sessionStorage.setItem('user', JSON.stringify(response || {}));
+              //this.authService.setCurrentUser(response)
             }
           )
         }else{
