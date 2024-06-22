@@ -8,7 +8,7 @@ import { UsersExtended } from '../models/users.model';
 
 
 import { IServicePartial } from '../models/serrvices.model';
-import { IUserAuthPartial } from '../models/auth.model';
+import { IUserAuthOmit, IUserAuthPartial } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,7 @@ export class AuthService {
       if (userId) {
         try {
 
-          const data:IUserAuthPartial = {
+          const data:IUserAuthOmit = {
             userUid: userId,
             email: userData.value.email,
             phone: userData.value.phone,
@@ -59,6 +59,7 @@ export class AuthService {
               statusActive: true
             }
             const firstService = await this.firestoreService.creteCollectionFirstServices('service', dataService, data.userUid?.toString() || "");
+            this.currentUser.set(newCollection.data || {});
             return { success: true, data: newCollection.data };
           }catch(error){
             return { success: false, error: 'Failed to create user collection or upload image. Please try again.', details: error };

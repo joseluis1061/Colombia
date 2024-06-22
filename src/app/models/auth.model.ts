@@ -11,3 +11,5 @@ export interface IUserAuth {
 }
 
 export interface IUserAuthPartial extends Partial<IUserAuth>{}
+
+export interface IUserAuthOmit extends Omit<IUserAuth, "name" | "password" | "identificacion" | "preferenties">{}

@@ -12,8 +12,9 @@ import { IUserAuthPartial } from '../../../../models/auth.model';
 export class MyUserComponent implements OnInit{
   private authService = inject(AuthService);
   user: IUserAuthPartial | null = null;
+  currentUser = this.authService.currentUser;
 
   ngOnInit(): void{
-
+    console.log("MyUser: ", this.currentUser())
   }
 }

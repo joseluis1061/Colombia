@@ -57,9 +57,13 @@ export class HeaderComponent implements OnInit{
         if(userCurrent){
           this.userCurrent.set(userCurrent);
           const currentUser = this.firestoreService.getUser(userCurrent.uid).subscribe(
-            response => this.userRole.set(response.role)
+            response => {
+              this.userRole.set(response.role || "user")
+              sessionStorage.setItem('user', JSON.stringify(response || {}))
+            }
           )
-
+        }else{
+          sessionStorage.removeItem('user')
         }
       }
     })

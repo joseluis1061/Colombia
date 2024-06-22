@@ -12,3 +12,5 @@ export interface IService{
 }
 
 export interface IServicePartial extends Partial<IService>{}
+
+export interface IServiceOmit extends Omit<IService, "serviceUid" |   "place" | "price" | "duration" | "aviable" | "description" | "images">{}

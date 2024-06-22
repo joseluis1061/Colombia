@@ -8,7 +8,7 @@ import { user } from '@angular/fire/auth';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
 
 import { IDataUser } from '../models/user.model';
-import { IServicePartial } from '../models/serrvices.model';
+import { IServiceOmit, IServicePartial } from '../models/serrvices.model';
 
 
 @Injectable({
