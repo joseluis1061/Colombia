@@ -33,23 +33,6 @@ export interface IDataUser{
   statusActive: true;
 }
 
-
-
-export interface IService{
-  serviceUid: String;
-  nameService: string;
-  typeService: string;
-  statusActive: true;
-  place: String;
-  price: Number;
-  duration: Number;
-  aviable: String[];
-  description: String;
-  images: String[];
-}
-
-export interface IServicePartial extends Partial<IService>{}
-
 export interface Picture {
   large: string;
   medium: string;

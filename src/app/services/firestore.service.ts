@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore, addDoc, collection, collectionData, doc, getDocs, getDoc, getFirestore, setDoc } from '@angular/fire/firestore';
 import { error } from 'console';
-import { UserAuthInterfase } from '../models/auth.model';
+import { IUserAuthPartial } from '../models/auth.model';
 import { Users } from '../models/users.model';
 import { Observable, from, map, of } from 'rxjs';
 import { user } from '@angular/fire/auth';
@@ -21,8 +21,8 @@ export class FirestoreService {
   constructor() { }
 
   // Crear colección de usuarios
-  async creteCollectionUser(nombreColeccion: string, datos: IDataUser) {
-    const path =  datos.userUid.toString();
+  async creteCollectionUser(nombreColeccion: string, datos: IUserAuthPartial) {
+    const path =  datos?.userUid?.toString() || "";
     try{
       const docRef = doc(this.firestore, `${nombreColeccion}/${path}`);
       await setDoc(docRef, datos);
@@ -45,7 +45,7 @@ export class FirestoreService {
     }
 
   // Traer datos de un usuario
-  async getCollectionUser(userId: string): Promise<UserAuthInterfase | null>{
+  async getCollectionUser(userId: string): Promise<IUserAuthPartial | null>{
     const db = getFirestore();
 
     const docRef = doc(db, "users", `${userId}`);
@@ -53,7 +53,7 @@ export class FirestoreService {
 
     if (docSnap.exists()) {
       //console.log("Document data:", docSnap.data());
-      return docSnap.data() as UserAuthInterfase;
+      return docSnap.data() as IUserAuthPartial;
     } else {
       // docSnap.data() will be undefined in this case
       //console.log("No such document!");
@@ -63,13 +63,13 @@ export class FirestoreService {
 
   getUser(userId: string){
     return from(getDoc(doc(this.firestore, 'users', userId))).pipe(
-      map((snapShot) => snapShot.data() as UserAuthInterfase)
+      map((snapShot) => snapShot.data() as IUserAuthPartial)
     );
   }
 
   getAllUsers(){
     const collectionUser = collection(this.firestore, 'users');
-    return collectionData(collectionUser, {idField: 'id'}) as Observable<UserAuthInterfase[]>;
+    return collectionData(collectionUser, {idField: 'id'}) as Observable<IUserAuthPartial[]>;
   }
 
   updateUser(userId: string, data: any){
