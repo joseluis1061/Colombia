@@ -7,8 +7,8 @@ import { Observable, from, of } from 'rxjs';
 import { UsersExtended } from '../models/users.model';
 
 
-import { IDataUser, IService } from '../models/user.model';
-
+import { IDataUser} from '../models/user.model';
+import { IServicePartial } from '../models/serrvices.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +53,7 @@ export class AuthService {
           const newCollection = await this.firestoreService.creteCollectionUser('users', data);
           //return { success: true, data: newCollection.data };
           try{
-            const dataService:IService = {
+            const dataService:IServicePartial = {
               nameService: userData.value.nameService,
               typeService: userData.value.typeService,
               statusActive: true

@@ -7,7 +7,8 @@ import { Observable, from, map, of } from 'rxjs';
 import { user } from '@angular/fire/auth';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
 
-import { IDataUser, IService } from '../models/user.model';
+import { IDataUser } from '../models/user.model';
+import { IServicePartial } from '../models/serrvices.model';
 
 
 @Injectable({
@@ -32,7 +33,7 @@ export class FirestoreService {
   }
 
     // Crear colección de primer servicio
-    async creteCollectionFirstServices(nombreColeccion: string, datos: IService, uid: string) {
+    async creteCollectionFirstServices(nombreColeccion: string, datos: IServicePartial, uid: string) {
       const path =  uid.toString();
       try{
         const docRef = doc(this.firestore, `${nombreColeccion}/${path}`);
