@@ -30,6 +30,11 @@ export interface IDataUser{
   email: string;
   phone: string;
   role: string;
+  statusActive: true;
+}
+
+export interface IService{
+  serviceUid?: string;
   nameService: string;
   typeService: string;
   statusActive: true;

@@ -7,7 +7,7 @@ import { Observable, from, map, of } from 'rxjs';
 import { user } from '@angular/fire/auth';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
 
-import { IDataUser } from '../models/user.model';
+import { IDataUser, IService } from '../models/user.model';
 
 
 @Injectable({
@@ -30,6 +30,18 @@ export class FirestoreService {
       return { success: false, error: 'Failed to create user document.', details: error };
     }
   }
+
+    // Crear colección de primer servicio
+    async creteCollectionFirstServices(nombreColeccion: string, datos: IService, uid: string) {
+      const path =  uid.toString();
+      try{
+        const docRef = doc(this.firestore, `${nombreColeccion}/${path}`);
+        await setDoc(docRef, datos);
+        return { success: true, data: datos };
+      }catch(error){
+        return { success: false, error: 'Failed to create user document.', details: error };
+      }
+    }
 
   // Traer datos de un usuario
   async getCollectionUser(userId: string): Promise<UserAuthInterfase | null>{
