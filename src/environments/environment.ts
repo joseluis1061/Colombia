@@ -3,11 +3,12 @@ export const environment = {
   production:false,
 	API_URL: "https://api-colombia.com/api/v1",
   firebaseConfig : {
-    apiKey: "AIzaSyDXBR1rIFiXlcTl62M2e6RtbJXCeork4Yc",
-    authDomain: "turismo-f9aa8.firebaseapp.com",
-    projectId: "turismo-f9aa8",
-    storageBucket: "turismo-f9aa8.appspot.com",
-    messagingSenderId: "691653797325",
-    appId: "1:691653797325:web:815c932aad0905c83fd084"
+    apiKey: "AIzaSyDaBDZQ_DlcKWuE8-uZG5UGQaycvDliXms",
+    authDomain: "turismocomunitario-173e7.firebaseapp.com",
+    projectId: "turismocomunitario-173e7",
+    storageBucket: "turismocomunitario-173e7.appspot.com",
+    messagingSenderId: "47976694446",
+    appId: "1:47976694446:web:b4343556ba7f605847e33f",
+    measurementId: "G-CV683XB0MR"
   }
 };

@@ -1,14 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, getDocs, getDoc, getFirestore, setDoc } from '@angular/fire/firestore';
-import { error } from 'console';
+import { Firestore, collection, collectionData, doc, getDoc, getFirestore, setDoc } from '@angular/fire/firestore';
 import { IUserAuthPartial } from '../models/auth.model';
-import { Users } from '../models/users.model';
 import { Observable, from, map, of } from 'rxjs';
-import { user } from '@angular/fire/auth';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
 
-import { IDataUser } from '../models/user.model';
-import { IServiceOmit, IServicePartial } from '../models/serrvices.model';
+import { IServicePartial } from '../models/serrvices.model';
 
 
 @Injectable({

@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Colombia, Regions, RegionDeparments, Department, City, TouristAttraction, President, CategoryNaturalArea, MapColombian } from '../models/colombian.models';
 import { map } from 'rxjs';
 import { REGIONS_IMAGE } from '../shared/constants/regions-image.const';
-import { subscribe } from 'node:diagnostics_channel';
 
 @Injectable({
   providedIn: 'root'

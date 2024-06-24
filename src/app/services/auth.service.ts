@@ -1,9 +1,9 @@
 import { inject, signal } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { FirestoreService } from './firestore.service';
-import { Observable, from, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UsersExtended } from '../models/users.model';
 
 
