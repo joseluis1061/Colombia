@@ -9,6 +9,8 @@ import { faTable } from '@fortawesome/free-solid-svg-icons';
 import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+
 
 import { Dialog } from '@angular/cdk/dialog';
 import { LoginComponent } from '../login/login.component';
@@ -42,6 +44,7 @@ export class HeaderComponent implements OnInit{
   faTableList = faTableList;
   faUser = faUser;
   faBars = faBars;
+  faCartShopping = faCartShopping;
 
   constructor(
     private dialog: Dialog,
