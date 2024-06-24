@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, Inject } from '@angular/core';
+import { Component, OnInit, inject, signal, Inject, PLATFORM_ID, afterRender  } from '@angular/core';
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { RouterLinkWithHref } from '@angular/router';
@@ -51,7 +51,8 @@ export class HeaderComponent implements OnInit{
   constructor(
     private dialog: Dialog,
     private router: Router,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: Object
   ){
       this.sessionStorage = document.defaultView?.sessionStorage;
     }
@@ -61,22 +62,25 @@ export class HeaderComponent implements OnInit{
   }
 
   isAutenticated(){
-    this.authService.isAuthenticated().subscribe({
-      next: (userCurrent) => {
-        if(userCurrent){
-          this.userCurrent.set(userCurrent);
-          const currentUser = this.firestoreService.getUser(userCurrent.uid).subscribe(
-            response => {
-              this.userRole.set(response.role || "user");
-              this.sessionStorage.setItem('user', JSON.stringify(response || {}));
-              //this.authService.setCurrentUser(response)
-            }
-          )
-        }else if(this.sessionStorage.getItem('user') !== undefined){
-          this.sessionStorage.removeItem('user')
+    if(isPlatformBrowser(this.platformId)){
+      this.authService.isAuthenticated().subscribe({
+        next: (userCurrent) => {
+          if(userCurrent){
+            this.userCurrent.set(userCurrent);
+            const currentUser = this.firestoreService.getUser(userCurrent.uid).subscribe(
+              response => {
+                this.userRole.set(response.role || "user");
+                this.sessionStorage.setItem('user', JSON.stringify(response || {}));
+                //this.authService.setCurrentUser(response)
+              }
+            )
+          }else if(this.sessionStorage.getItem('user') !== undefined){
+            this.sessionStorage.removeItem('user')
+          }
         }
-      }
-    })
+      })
+
+    }
   }
 
   openDialogLogin() {
