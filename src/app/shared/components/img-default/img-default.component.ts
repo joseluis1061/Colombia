@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ImgDefaultComponent {
   img:string = '';
-  imgDefalult = './assets/images/default.png';
+  imgDefalult = 'https://firebasestorage.googleapis.com/v0/b/turismocomunitario-173e7.appspot.com/o/assets%2Fweb%2Fdefault.png?alt=media&token=1cef4130-e439-43cc-851d-6d337b1eff36';
 
   @Input('img') set onChangeImg(img:string){
     this.img = img;
