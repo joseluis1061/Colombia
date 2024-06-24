@@ -1,14 +1,14 @@
 <div class="w-full flex flex-wrap justify-start items-center">
   <!-- <h2 class="text-5xl">Busca tú servicio</h2> -->
   <div class="flex justify-around gap-5 mt-4 w-full">
-    <div routerLink="/" class="flex flex-col justify-center items-center cursor-pointer">
+    <div [routerLink]="['/']" class="flex flex-col justify-center items-center cursor-pointer">
       <div class="border-b-2 border-blue-950">
         <fa-icon class="text-lg text-blue-950" [icon]="faHotel"></fa-icon>
       </div>
       <a class="text-lg text-blue-950">Hotel</a>
     </div>
 
-    <div routerLink="/restautants" class="flex flex-col justify-center items-center cursor-pointer">
+    <div [routerLink]="['/restautants']" class="flex flex-col justify-center items-center cursor-pointer">
       <div class="border-b-2 border-blue-950">
         <fa-icon class="text-lg text-blue-950" [icon]="faUtensils"></fa-icon>
       </div>

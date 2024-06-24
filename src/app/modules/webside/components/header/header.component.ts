@@ -1,4 +1,5 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, Inject } from '@angular/core';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { RouterLinkWithHref } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -25,7 +26,7 @@ import { Route } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FontAwesomeModule, RouterLinkWithHref, RouterModule, OverlayModule],
+  imports: [FontAwesomeModule, RouterLinkWithHref, RouterModule, OverlayModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -45,11 +46,15 @@ export class HeaderComponent implements OnInit{
   faUser = faUser;
   faBars = faBars;
   faCartShopping = faCartShopping;
+  sessionStorage: any;
 
   constructor(
     private dialog: Dialog,
-    private router: Router
-  ){}
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document
+  ){
+      this.sessionStorage = document.defaultView?.sessionStorage;
+    }
 
   ngOnInit(): void {
     this.isAutenticated();
@@ -63,12 +68,12 @@ export class HeaderComponent implements OnInit{
           const currentUser = this.firestoreService.getUser(userCurrent.uid).subscribe(
             response => {
               this.userRole.set(response.role || "user");
-              sessionStorage.setItem('user', JSON.stringify(response || {}));
+              this.sessionStorage.setItem('user', JSON.stringify(response || {}));
               //this.authService.setCurrentUser(response)
             }
           )
-        }else{
-          sessionStorage.removeItem('user')
+        }else if(this.sessionStorage.getItem('user') !== undefined){
+          this.sessionStorage.removeItem('user')
         }
       }
     })
