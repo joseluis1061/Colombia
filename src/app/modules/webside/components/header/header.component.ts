@@ -46,16 +46,13 @@ export class HeaderComponent implements OnInit{
   faUser = faUser;
   faBars = faBars;
   faCartShopping = faCartShopping;
-  sessionStorage: any;
 
   constructor(
     private dialog: Dialog,
     private router: Router,
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: Object
-  ){
-      this.sessionStorage = document.defaultView?.sessionStorage;
-    }
+  ){}
 
   ngOnInit(): void {
     this.isAutenticated();
@@ -63,6 +60,7 @@ export class HeaderComponent implements OnInit{
 
   isAutenticated(){
     if(isPlatformBrowser(this.platformId)){
+      console.log("Browser")
       this.authService.isAuthenticated().subscribe({
         next: (userCurrent) => {
           if(userCurrent){
@@ -70,12 +68,12 @@ export class HeaderComponent implements OnInit{
             const currentUser = this.firestoreService.getUser(userCurrent.uid).subscribe(
               response => {
                 this.userRole.set(response.role || "user");
-                this.sessionStorage.setItem('user', JSON.stringify(response || {}));
+                sessionStorage.setItem('user', JSON.stringify(response || {}));
                 //this.authService.setCurrentUser(response)
               }
             )
-          }else if(this.sessionStorage.getItem('user') !== undefined){
-            this.sessionStorage.removeItem('user')
+          }else if(sessionStorage.getItem('user') !== undefined){
+            sessionStorage.removeItem('user')
           }
         }
       })

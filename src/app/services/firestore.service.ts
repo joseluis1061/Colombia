@@ -1,11 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, collectionData, doc, getDoc, getFirestore, setDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, docData, getDoc, getFirestore, setDoc } from '@angular/fire/firestore';
 import { IUserAuthPartial } from '../models/auth.model';
 import { Observable, from, map, of } from 'rxjs';
-import { deleteDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, deleteDoc, DocumentReference, updateDoc } from 'firebase/firestore';
 
 import { IServicePartial } from '../models/serrvices.model';
-
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +75,60 @@ export class FirestoreService {
   deleteUser(userId: string){
     const docRef = doc(this.firestore, 'users', userId);
     return of(deleteDoc(docRef));
+  }
+
+  // Funciones generales firebase
+  // Traer elemento sin suscribirme a los cambios
+  getDocument<tipo>(path: string){
+    const document = doc(this.firestore, path) as DocumentReference<tipo, any>;
+    return getDoc<tipo, any>(document);
+  }
+
+  // Traer elemento sin suscribirme a los cambios
+  getDocumentChanges<tipo>(path: string){
+    const document = doc(this.firestore, path);
+    return docData(document) as Observable<tipo>;
+  }
+
+  getCollectionChanges<tipo>(path: string){
+    const itemCollection = collection(this.firestore, path);
+    return collectionData(itemCollection) as Observable<tipo[]>;
+  }
+
+  // Crear documento con id incluido en el path
+  createDocument(data: any, path: string){
+    const document = doc(this.firestore, `${path}`);
+    return setDoc(document, data);
+  }
+  // Crear documento con id del documento manual
+  createDocumentID(data: any, path: string, idDoc: string){
+    const document = doc(this.firestore, `${path}/${idDoc}`);
+    return setDoc(document, data);
+  }
+
+  // Crear documento con id del documento automatico
+  async addDocument(data: any, path: string){
+    const collectionRef = collection(this.firestore, path);
+    await addDoc(collectionRef, data);
+  }
+
+  async updateDocumentID(data:any, path:string, idDoc:string){
+    const document = doc(this.firestore, `${path}/${idDoc}`);
+    return updateDoc(document, data);
+  }
+
+  deleteDocumentID(path: string, idDoc: string){
+    const document = doc(this.firestore, `${path}/${idDoc}`);
+    return deleteDoc(document);
+  }
+
+  deleteDocFromRef(ref: any){
+    return deleteDoc(ref);
+  }
+
+  createIdDoc(){
+    const { v4: uuidv4 } = require('uuid');
+    return uuidv4();
   }
 
 
