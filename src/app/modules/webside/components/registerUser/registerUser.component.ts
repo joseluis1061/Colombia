@@ -129,7 +129,7 @@ export class RegisterUserComponent {
       this.registerForm.patchValue({
         image: file
       });
-      console.log("IMAGEN FORM: ", file)
+      // console.log("IMAGEN FORM: ", file)
     }
   }
 
