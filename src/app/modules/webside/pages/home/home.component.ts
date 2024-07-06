@@ -30,16 +30,21 @@ export class HomeComponent implements OnInit{
   faPersonWalkingLuggage = faPersonWalkingLuggage;
   faLocationDot = faLocationDot;
 
-  services: IService[] = [];
+  services: IHomeServices[] = [];
+  imgPrincipal: string= "";
 
   ngOnInit(): void {
-    this.firestoreService.getCollectionChanges<IService>("HomeServicios").subscribe(
-      response => {
+    this.firestoreService.getCollectionChanges<IHomeServices>("HomeServicios").subscribe(
+      (response) => {
         this.services = response;
         console.log("servicios", this.services);
+        this.imgPrincipal = this.services[0].url_img;
       }
     );
+
   }
+
+
 
 
 }
