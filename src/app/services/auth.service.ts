@@ -1,14 +1,16 @@
 import { inject, signal } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
+import { Auth, User, user } from '@angular/fire/auth';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { FirestoreService } from './firestore.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { UsersExtended } from '../models/users.model';
-
 
 import { IServicePartial } from '../models/serrvices.model';
 import { IUserAuthOmit, IUserAuthPartial } from '../models/auth.model';
+import { Router } from '@angular/router';
+
+import { IUserAuth } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,12 @@ export class AuthService {
   private firestoreService= inject(FirestoreService);
   private auth = inject(Auth);
   currentUser = signal<IUserAuthPartial>({});
+
+  private router: Router = inject(Router);
+  user$ = user(this.auth);
+  userSubscription!: Subscription;
+  currentUserState$ = new BehaviorSubject<User|null>(null);
+  private currentUserState: User|null = null;
 
 
   signInUser(email:string, password:string){
@@ -119,5 +127,49 @@ export class AuthService {
       console.log(error);
     }
   }
+
+
+
+
+  ////Nueva version
+  constructor() {
+    this.getUid();
+    this.stateAuth();
+  }
+
+  login(email:string, password: string){
+    return signInWithEmailAndPassword(this.auth, email, password);
+  }
+  registerUser(email: string, password: string){
+    return createUserWithEmailAndPassword(this.auth, email, password);
+  }
+
+  stateAuth(){
+    onAuthStateChanged(this.auth, user => {
+      if(user){
+        this.currentUserState= user;
+        this.currentUserState$.next(this.currentUserState);
+        return this.currentUserState;
+      }
+      else{
+
+        return of(null);
+      }
+    })
+  }
+
+
+  async getUid(){
+    const user = await this.auth.currentUser;
+    if(user === undefined) {
+      return null;
+    }else{
+      return user?.uid;
+    }
+  }
+
+  // logout(){
+  //   return signOut(this.auth);
+  // }
 
 }

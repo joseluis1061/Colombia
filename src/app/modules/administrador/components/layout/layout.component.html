@@ -5,7 +5,11 @@
     <nav class="header__nav flex justify-center items-center gap-5">
       <li class="header__notification list-none">
 
-        <button type="button" class="bg-transparent text-white font-bold border border-white hover:bg-white hover:text-black delay-500 transition-all px-4 py-2 rounded-xl">
+        <button
+          type="button"
+          (click)="openDialogCreateEvent()"
+          class="bg-transparent text-white font-bold border border-white hover:bg-white hover:text-black delay-500 transition-all px-4 py-2 rounded-xl"
+        >
           Anunciar Evento
         </button>
       </li>
