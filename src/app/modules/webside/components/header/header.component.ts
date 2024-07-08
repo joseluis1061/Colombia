@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, Inject, PLATFORM_ID, afterRender  } from '@angular/core';
+import { Component, OnInit, inject, signal, Inject, PLATFORM_ID, AfterViewInit  } from '@angular/core';
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { RouterLinkWithHref } from '@angular/router';
@@ -30,13 +30,12 @@ import { Route } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit, AfterViewInit{
   private firestoreService = inject(FirestoreService);
   private authService = inject(AuthService);
   currentUser = this.authService.currentUser;
   userCurrent = signal<any | null>(null);
   userRole = signal<string>('user');
-
 
   openUserOptions: boolean = false;
   faCoffee = faCoffee;
@@ -46,21 +45,26 @@ export class HeaderComponent implements OnInit{
   faUser = faUser;
   faBars = faBars;
   faCartShopping = faCartShopping;
+  isBrowser!: boolean;
 
   constructor(
     private dialog: Dialog,
     private router: Router,
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: Object
-  ){}
-
-  ngOnInit(): void {
-    this.isAutenticated();
+  ){
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
+  ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    this.isAutenticated();
+  }
   isAutenticated(){
-    if(isPlatformBrowser(this.platformId)){
-      console.log("Browser")
+    if(this.isBrowser){
+      console.log("Browser sessionStorage");
       this.authService.isAuthenticated().subscribe({
         next: (userCurrent) => {
           if(userCurrent){
@@ -77,7 +81,6 @@ export class HeaderComponent implements OnInit{
           }
         }
       })
-
     }
   }
 
