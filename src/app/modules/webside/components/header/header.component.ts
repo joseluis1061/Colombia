@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, Inject, PLATFORM_ID, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, inject, signal, Inject, PLATFORM_ID, AfterViewInit, afterNextRender } from '@angular/core'; //afterNextRender
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { RouterLinkWithHref } from '@angular/router';
@@ -54,15 +54,21 @@ export class HeaderComponent implements OnInit, AfterViewInit{
     @Inject(PLATFORM_ID) private platformId: Object
   ){
     this.isBrowser = isPlatformBrowser(platformId);
+
+    afterNextRender(() => {
+      // Safe to check `scrollHeight` because this will only run in the browser, not the server.
+      this.isAutenticated();
+    });
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    this.isAutenticated();
+
   }
-  isAutenticated(){
+
+  isAutenticated(): void{
     if(this.isBrowser){
       console.log("Browser sessionStorage");
       this.authService.isAuthenticated().subscribe({
