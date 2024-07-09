@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { RouterLinkWithHref } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHotel } from '@fortawesome/free-solid-svg-icons';
@@ -20,8 +20,9 @@ import { IService } from '../../../../models/serrvices.model';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, AfterViewInit{
   private firestoreService: FirestoreService = inject(FirestoreService);
+  item!: IHomeServices;
 
   faHotel = faHotel;
   faUtensils = faUtensils;
@@ -37,11 +38,25 @@ export class HomeComponent implements OnInit{
     this.firestoreService.getCollectionChanges<IHomeServices>("HomeServicios").subscribe(
       (response) => {
         this.services = response;
-        //console.log("servicios", this.services);
+        console.log("servicios", this.services);
         this.imgPrincipal = this.services[0].url_img;
+        this.item = this.services[0];
       }
     );
+  }
 
+  ngAfterViewInit(): void {
+    console.log("thumbnailBorderDom: ")
+  }
+
+  prevArrow(){
+    const element = this.services.splice(this.services.length -1, 1);
+    this.services.unshift(element[0]);
+  }
+
+  nextArrow(){
+    const element = this.services.splice(0,1);
+    this.services.push(element[0]);
   }
 
 

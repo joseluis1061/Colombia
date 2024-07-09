@@ -1,6 +1,336 @@
-.carousel__wraper{
-  width: calc(100% + 150px);
+.home{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Carrousel */
+.carousel{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  // margin-top: -50px;
+  position: relative;
+}
+.cover{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.carousel .list .item{
+  position: absolute;
+  inset: 0 0 0 0;
+
+}
+.carousel .list .item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousel .list .item .content{
+  padding: 10px;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 1140px;
+  max-width: 80%;
+  padding-right: 30%;
+  transform: translate(-50%);
+  box-sizing: border-box;
+  color: #110367;
+  // color: #eeeeee;
+  /* box-shadow: 0 5px 10px #00000e; */
+  /* border: 1px solid red; */
+}
+.carousel .list .item .content .author{
+  font-weight: bold;
+  letter-spacing: 10px;
+}
+.carousel .list .item .content .title,
+.carousel .list .item .content .topic{
+  font-weight: bold;
+  font-size: 2em;
+  line-height: 1.5em;
+}
+.carousel .list .item .topic{
+  color: #66ba0c;
+}
+.carousel .list .item .buttons{
+  display: grid;
+  grid-template-columns: repeat(2, 150px);
+  grid-template-rows: 40px;
+  gap: 5px;
+  margin-top: 20px;
+}
+.carousel .list .item .buttons button{
+  border: none;
+  background-color: #eee;
+  letter-spacing: 3px;
+  font-family: Poppins;
+  font-weight: 500;
+}
+.carousel .list .item .buttons button:nth-child(2){
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #eee;
+}
+/* thumbail */
+.thumbnail{
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  width: max-content;
+  z-index: 100;
   display: flex;
-  justify-content: space-between;
-  overflow: visible;
+  gap: 20px;
+  /* border: 1px solid red; */
+}
+.thumbnail .item{
+  width: 150px;
+  height: 220px;
+  flex-shrink: 0;
+  position: relative;
+}
+.thumbnail .item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.thumbnail .item .content{
+  color: #fff;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+/* arrows */
+.arrows{
+  position: absolute;
+  top: 80%;
+  right: 52%;
+  z-index: 100;
+  width: 300px;
+  max-width: 30%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.arrows button{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eee4;
+  border: none;
+  color: #ffffff;
+  font-family: monospace;
+  font-weight: bold;
+  transition: .5s;
+  z-index: 20;
+  border: 2px solid #eee4;
+}
+.arrows button:hover{
+  // background-color: #fff;
+  background-color: #ffffff;
+  color: #000;
+}
+/* animation text hiden */
+.carousel .list .item:nth-child(1){
+  z-index: 1;
+}
+.carousel .list .item:nth-child(1) .content .author,
+.carousel .list .item:nth-child(1) .content .title,
+.carousel .list .item:nth-child(1) .content .topic,
+.carousel .list .item:nth-child(1) .content .des,
+.carousel .list .item:nth-child(1) .content .buttons
+{
+    transform: translateY(50px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s 1s linear 1 forwards;
+}
+@keyframes showContent{
+  to{
+      transform: translateY(0px);
+      filter: blur(0px);
+      opacity: 1;
+  }
+}
+.carousel .list .item:nth-child(1) .content .title{
+  animation-delay: 1.2s!important;
+}
+.carousel .list .item:nth-child(1) .content .topic{
+  animation-delay: 1.4s!important;
+}
+.carousel .list .item:nth-child(1) .content .des{
+  animation-delay: 1.6s!important;
+}
+.carousel .list .item:nth-child(1) .content .buttons{
+  animation-delay: 1.8s!important;
+}
+
+/* create animation when next click */
+/*
+La primer imagen de los items la hace pequeña al tamaño del thumbnail
+y la sobre pone sobre la primer imagen del tumbnail, luego la anima
+para que parezca que crece al tamaño maximo de la pantalla.
+*/
+
+.carousel.next .list .item:nth-child(1) img{
+  width: 150px;
+  height: 220px;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  border-radius: 30px;
+  animation: showImage .5s linear 1 forwards;
+}
+@keyframes showImage{
+  to{
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    border-radius: 0;
+  }
+}
+
+/*
+Después la última imagen de .thumbnail inicia con ancho cero
+y opacidad 0 hasta llegar al tamaño designado por eso es from
+*/
+.carousel.next .thumbnail .item:nth-last-child(1){
+  /* Si dejo overflow hidden y la imagen inicial no tiene ancho el texto no se vera
+  Es un truco para que el texto aparezca con la imagen */
+  overflow: hidden;
+  animation: showThumbnail .5s linear 1 forwards;
+}
+.carousel.prev .list .item img{
+  z-index: 100;
+}
+@keyframes showThumbnail{
+  from{
+    width: 0;
+    opacity: 0;
+  }
+}
+/*
+Este es el efecto de desplazamiento de todo el contenedor thumbnail
+inicia desplazado 150px hasta tomar la posición deseada
+*/
+.carousel.next .thumbnail{
+  animation: effectNext .5s linear 1 forwards;
+}
+
+@keyframes effectNext{
+  from{
+    transform: translateX(150px);
+  }
+}
+
+/* running time */
+
+/*
+Esta animación crea un indicador para que se entienda que no se
+puede dar click en la siguiente imagen hasta que la animación no
+haya terminado
+*/
+.carousel .time{
+  position: absolute;
+  z-index: 1000;
+  width: 0%;
+  height: 3px;
+  background-color: #f1683a;
+  left: 0;
+  top: 0;
+}
+
+.carousel.next .time,
+.carousel.prev .time{
+  animation: runningTime 3s linear 1 forwards;
+}
+@keyframes runningTime{
+  from{ width: 100%}
+  to{width: 0}
+}
+
+
+/* prev click */
+
+/*
+La segunda imagen de fondo de pantalla pasa al frente
+*/
+.carousel.prev .list .item:nth-child(2){
+  z-index: 2;
+}
+/*
+Vamos a crear una animación donde la imagen pase de grande a pequeña
+y se superponga con la de thumbnails
+*/
+.carousel.prev .list .item:nth-child(2) img{
+  animation: outFrame 0.5s linear 1 forwards;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+@keyframes outFrame{
+  to{
+    width: 150px;
+    height: 220px;
+    bottom: 50px;
+    left: 50%;
+    border-radius: 20px;
+  }
+}
+
+/*
+Ahora agregamos una animación para que la primer imagen de thumbnail se haga mas ancha
+iniciando desde un ancho 0
+*/
+.carousel.prev .thumbnail .item:nth-child(1){
+  overflow: hidden;
+  opacity: 0;
+  animation: showThumbnail .5s linear 1 forwards;
+}
+.carousel.next .arrows button,
+.carousel.prev .arrows button{
+  pointer-events: none;
+}
+
+/*
+Esta animación hace que el texto de la imagen que se esta desapareciendo
+suba, de tal manera que se vea complementaria a la animación
+de texto previa, dando efecto que esta se va cuando la otra llega
+*/
+.carousel.prev .list .item:nth-child(2) .content .author,
+.carousel.prev .list .item:nth-child(2) .content .title,
+.carousel.prev .list .item:nth-child(2) .content .topic,
+.carousel.prev .list .item:nth-child(2) .content .des,
+.carousel.prev .list .item:nth-child(2) .content .buttons
+{
+  animation: contentOut 1.5s linear 1 forwards!important;
+}
+@keyframes contentOut{
+  to{
+    transform: translateY(-150px);
+    filter: blur(20px);
+    opacity: 0;
+  }
+}
+
+/*Media queries 678px*/
+@media screen and (max-width: 770px) {
+  .carousel .list .item .content{
+    padding-right: 0;
+  }
+  .carousel .list .item .content .title{
+    font-size: 30px;
+  }
 }

@@ -1,59 +1,55 @@
-<section class="home h-screen">
-  <div class="home__container flex flex-wrap justify-stretch w-[90%] h-full m-auto">
-
-    <div class="home__thumbnails relative z-10 pt-14 w-1/2 h-2/3 flex flex-col justify-between">
-
-      <div class="flex flex-col">
-        <app-menu-simple-service></app-menu-simple-service>
-      </div>
-
-
-      <div class="thumbnails__carousel w-full flex items-end flex-wrap">
-        <div class="carousel__wraper">
-          @for (service of services; track $index) {
-            <div class="thumbnail__item flex flex-col w-40 h-56 relative">
-              <img class="w-full h-full object-cover" [src]="service.url_img" alt="regions" loading="lazy">
-              <div class="thumbnail__leyend absolute bottom-0 bg-blue-950 px-2 py-2 text-white w-full">
-                <p>{{service.title}}</p>
-              </div>
+<section class="home">
+  <div class="carousel">
+    <div class="cover"></div>
+    <div class="list">
+      @for(service of services; track service){
+        <div class="item" #item>
+          <img [src]="service.url_img" />
+          <div class="content" #content>
+            <div class="title" #title>{{service.title}}</div>
+            <div class="topic" #topic>{{service.legend}}</div>
+            <!-- <div class="des" #des>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
+              sequi, rem magnam nesciunt minima placeat, itaque eum neque
+              officiis unde, eaque optio ratione aliquid assumenda facere ab et
+              quasi ducimus aut doloribus non numquam. Explicabo, laboriosam
+              nisi reprehenderit tempora at laborum natus unde. Ut,
+              exercitationem eum aperiam illo illum laudantium?
+            </div> -->
+            <div class="buttons" #buttons>
+              <button>SEE MORE</button>
+              <button>SUBSCRIBE</button>
             </div>
-          }
-
+          </div>
         </div>
+      }
+    </div>
 
-        <div class="arrows flex-grow self-end flex items-center p-2 gap-5 bg-lime-400">
-          <button type="button" class="text-lg font-bold"><</button>
-          <button type="button" class="text-lg font-bold">></button>
+    <!-- list thumnail -->
+    <div class="thumbnail" #thumbnail>
+      @for(service of services; track service){
+        <div class="item" #item>
+          <img [src]="service.url_img" />
+          <div class="content">
+            <div class="title">{{service.title}}</div>
+            <div class="description">{{service.legend}}</div>
+          </div>
         </div>
-      </div>
+      }
     </div>
 
-    <div class="home__explore relative w-1/2 h-2/3">
-      <img class="object-cover h-full w-full" [src]="imgPrincipal" alt="region-explore" loading="lazy">
-      <button class="absolute bottom-5 right-5 py-2 px-4 rounded-2xl text-blue-950 font-bold border-none bg-lime-400 hover:bg-lime-300" type="button">Explora</button>
+    <div class="arrows">
+      <button (click)="prevArrow()" id="prev" #prev><</button>
+      <button (click)="nextArrow()" id="next" #next>></button>
     </div>
-
-    <div class="home__events w-1/2 h-1/3 overflow-hidden relative">
-      <div class="absolute top-0 left-0 bg-blue-950 text-white w-1/2 ps-2 py-2">
-        <p>Tour 7 pueblos del sur occidente</p>
-        <p>Junio 10-20</p>
-      </div>
-      <img class="object-cover center" src="https://firebasestorage.googleapis.com/v0/b/turismo-f9aa8.appspot.com/o/home%2Ftour.jpg?alt=media&token=f6d85160-ebd9-4619-8aac-06e09045dc62" alt="Tour" loading="lazy">
-
-      <button class="absolute bottom-5 right-5 py-2 px-4 rounded-2xl text-blue-950 font-bold border-none bg-lime-400 hover:bg-lime-300" type="button">Reserva</button>
-    </div>
-
-    <div class="home__events w-1/2 h-1/3 overflow-hidden relative">
-      <div class="absolute top-0 left-0 bg-blue-950 text-white w-1/2 ps-2 py-2">
-        <p>Carnaval negros y blancos</p>
-        <p>Enero 3-6</p>
-      </div>
-      <img class="object-cover center" src="https://firebasestorage.googleapis.com/v0/b/turismo-f9aa8.appspot.com/o/home%2Fpasto.avif?alt=media&token=412039c5-ea74-4163-9368-b220d1ca5e19" alt="Eventos" loading="lazy">
-
-      <button class="absolute bottom-5 right-5 py-2 px-4 rounded-2xl text-blue-950 font-bold border-none bg-lime-400 hover:bg-lime-300" type="button">Reserva</button>
-    </div>
-
+    <!-- time running -->
+    <div class="time" #time></div>
   </div>
+
 </section>
 
+
+      <!-- <div class="flex flex-col">
+        <app-menu-simple-service></app-menu-simple-service>
+      </div> -->
 
