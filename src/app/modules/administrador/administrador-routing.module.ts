@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
 import { UsersComponent } from './pages/users/users.component';
 import { MyUserComponent } from './pages/my-user/my-user.component';
+import { RegionsListComponent } from './pages/regions-list/regions-list.component';
 import { BoardComponent } from './pages/board/board.component';
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent,
+      },
+      {
+        path: 'regions',
+        component: RegionsListComponent,
       }
     ]
   }
