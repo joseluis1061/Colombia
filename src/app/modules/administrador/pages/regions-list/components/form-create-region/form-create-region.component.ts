@@ -10,6 +10,14 @@ interface OutputData {
   rta: Boolean;
 }
 
+interface IRegion {
+  id: string;
+  name: string;
+  legend: string;
+  image: string;
+  date: Date;
+}
+
 @Component({
   selector: 'app-form-create-region',
   standalone: true,
@@ -53,6 +61,15 @@ interface OutputData {
 export class FormCreateRegionComponent  implements OnInit{
 
   createRegionForm: FormGroup = new FormGroup({});
+  newFile: any|null = null;
+  newRegion: IRegion = {
+    id: "",
+    name: "",
+    legend: "",
+    image: "",
+    date: new Date
+  };
+
 
   constructor(
     private dialogRef: DialogRef<OutputData>,
@@ -67,12 +84,29 @@ export class FormCreateRegionComponent  implements OnInit{
     this.createRegionForm = new FormGroup({
       name: new FormControl('', Validators.required),
       legend: new FormControl('', Validators.required),
+      image: new FormControl('', Validators.required)
     });
   }
 
   onSubmitRegion(){
     console.log(this.createRegionForm.value);
     this.close();
+  }
+
+
+  async upLoadImage(event: any){
+    console.log("Upload Img")
+    if (event.target.files && event.target.files[0]) {
+      this.newFile = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // Lee el archivo como una URL de datos
+      reader.onloadend = (e) => {
+        if(e.target !== null){
+          this.newRegion.image = e.target['result'] as string; // Establece la URL en la variable
+
+        }
+      };
+    }
   }
 
   close(){
