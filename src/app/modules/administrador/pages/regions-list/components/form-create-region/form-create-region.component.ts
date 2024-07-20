@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogRef, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
-
+import { FirestoreService } from '../../../../../../services/firestore.service';
+import { FirebaseStorageService } from '../../../../../../services/firebase-storage.service';
 interface InputData {
   name: string;
 }
@@ -70,6 +71,8 @@ export class FormCreateRegionComponent  implements OnInit{
     date: new Date
   };
 
+  private firestoreService = inject(FirestoreService);
+  private firebaseStorageService = inject(FirebaseStorageService);
 
   constructor(
     private dialogRef: DialogRef<OutputData>,
@@ -84,12 +87,30 @@ export class FormCreateRegionComponent  implements OnInit{
     this.createRegionForm = new FormGroup({
       name: new FormControl('', Validators.required),
       legend: new FormControl('', Validators.required),
-      image: new FormControl('', Validators.required)
+      image: new FormControl('', Validators.required),
     });
   }
 
   onSubmitRegion(){
     console.log(this.createRegionForm.value);
+    console.log("Imagenes:: ", this.createRegionForm.get("images")?.value);
+    this.newRegion.name = this.createRegionForm.get("nmae")?.value;
+    this.newRegion.name = this.createRegionForm.get("legend")?.value;
+    this.newRegion.name = this.createRegionForm.get("image")?.value;
+
+    const name = this.createRegionForm.get("name")?.value;
+    let path = "";
+    if(name) path = `Regions/${name}`;
+
+    console.log("PATH: ", path);
+
+    this.firestoreService.createDocument(this.newRegion, path).then(
+      getRef => {
+        console.log("ReferenciaID: ", getRef)
+      }
+    )
+
+    //if(this.newFile !== null) this.firebaseStorageService.uploadFile()
     this.close();
   }
 
@@ -103,7 +124,6 @@ export class FormCreateRegionComponent  implements OnInit{
       reader.onloadend = (e) => {
         if(e.target !== null){
           this.newRegion.image = e.target['result'] as string; // Establece la URL en la variable
-
         }
       };
     }
