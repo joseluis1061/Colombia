@@ -4,19 +4,10 @@ import { DialogRef, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
 import { FirestoreService } from '../../../../../../services/firestore.service';
 import { FirebaseStorageService } from '../../../../../../services/firebase-storage.service';
-interface InputData {
-  name: string;
-}
+import { IRegion } from '../../../../../../models/regions.model';
+
 interface OutputData {
   rta: Boolean;
-}
-
-interface IRegion {
-  id: string;
-  name: string;
-  legend: string;
-  image: string;
-  date: Date;
 }
 
 @Component({
@@ -73,15 +64,29 @@ export class FormCreateRegionComponent  implements OnInit{
 
   private firestoreService = inject(FirestoreService);
   private firebaseStorageService = inject(FirebaseStorageService);
+  functionBtn: string = "";
 
   constructor(
     private dialogRef: DialogRef<OutputData>,
-    @Inject(DIALOG_DATA) data: InputData
+    @Inject(DIALOG_DATA) data: IRegion
   ) {
+    if(data){
+
+      this.createRegionForm = new FormGroup({
+        name: new FormControl(data.name, Validators.required),
+        legend: new FormControl(data.legend, Validators.required),
+        image: new FormControl(''),
+      });
+      this.newRegion = data;
+      this.functionBtn = "Actualizar";
+    }else{
+      this.initFormParent();
+      this.functionBtn = "Crear";
+    }
   }
 
   ngOnInit(): void {
-    this.initFormParent();
+    // this.initFormParent();
   }
   initFormParent(){
     this.createRegionForm = new FormGroup({
