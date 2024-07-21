@@ -95,21 +95,21 @@ export class FirestoreService {
     return collectionData(itemCollection) as Observable<tipo[]>;
   }
 
-  // Crear documento con id incluido en el path
+  // Crear documento con id automatico
   createDocument(data: any, path: string){
     const document = doc(this.firestore, `${path}`);
     return setDoc(document, data);
   }
   // Crear documento con id del documento manual
-  createDocumentID(data: any, path: string, idDoc: string){
+  async createDocumentID(data: any, path: string, idDoc: string){
     const document = doc(this.firestore, `${path}/${idDoc}`);
-    return setDoc(document, data);
+    return await setDoc(document, data);
   }
 
   // Crear documento con id del documento automatico
   async addDocument(data: any, path: string){
     const collectionRef = collection(this.firestore, path);
-    await addDoc(collectionRef, data);
+    return await addDoc(collectionRef, data);
   }
 
   async updateDocumentID(data:any, path:string, idDoc:string){

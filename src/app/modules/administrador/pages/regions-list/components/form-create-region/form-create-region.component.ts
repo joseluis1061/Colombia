@@ -91,27 +91,65 @@ export class FormCreateRegionComponent  implements OnInit{
     });
   }
 
-  onSubmitRegion(){
+  async onSubmitRegion(){
     console.log(this.createRegionForm.value);
     console.log("Imagenes:: ", this.createRegionForm.get("images")?.value);
-    this.newRegion.name = this.createRegionForm.get("nmae")?.value;
-    this.newRegion.name = this.createRegionForm.get("legend")?.value;
-    this.newRegion.name = this.createRegionForm.get("image")?.value;
+    this.newRegion.name = this.createRegionForm.get("name")?.value;
+    this.newRegion.legend = this.createRegionForm.get("legend")?.value;
 
-    const name = this.createRegionForm.get("name")?.value;
-    let path = "";
-    if(name) path = `Regions/${name}`;
+    // Nueva region
+    if (this.newRegion.id.length <= 0){
+      // Crear documento
+      const id = await this.saveRegion();
 
-    console.log("PATH: ", path);
+      // Guardar imagen y agregar url al documento
+      if(id.length > 0 && this.newFile !== null) {
+        console.log("NEW FILE: ", this.newFile);
+        const url = await this.saveImage(id);
+        await this.updateRegion(id);
+      };
+    }
+    // Actualizar region
+    else{
+      // Guardar imagen y agregar url al documento
+      if(this.newFile !== null) {
+        console.log("NEW FILE: ", this.newFile);
+        const url = await this.saveImage(this.newRegion.id);
+      };
+      await this.updateRegion(this.newRegion.id);
+    }
 
-    this.firestoreService.createDocument(this.newRegion, path).then(
-      getRef => {
-        console.log("ReferenciaID: ", getRef)
+    this.close();
+  }
+
+  async saveRegion(){
+    let id = "";
+    await this.firestoreService.addDocument(this.newRegion, 'Regions').then(
+      res => {
+        id = res.id.toString();
+        console.log("ADD DOC: ", id)
+      }
+    );
+    return id;
+  }
+  async updateRegion(id:string){
+    await this.firestoreService.createDocumentID(this.newRegion, 'Regions', id).then(
+      res => {
+        console.log("Upload DOC: ", res)
+      }
+    );
+    return id;
+  }
+  async saveImage(id: string){
+    let url = "";
+    await this.firebaseStorageService.uploadFile(`Regions/${id}`, this.newFile).then(
+      urlImg => {
+        this.newRegion.image = urlImg;
+        this.newRegion.id = id;
+        console.log("NewRegion: ", this.newRegion);
       }
     )
-
-    //if(this.newFile !== null) this.firebaseStorageService.uploadFile()
-    this.close();
+    return url;
   }
 
 
