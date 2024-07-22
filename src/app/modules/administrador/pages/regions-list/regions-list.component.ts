@@ -53,4 +53,10 @@ export class RegionsListComponent implements OnInit{
       console.log(output);
     })
   }
+
+  async onDelete(region: IRegion){
+    if(confirm("Estas seguro de eliminar la región "+region.name.toUpperCase())) {
+      this.firestoreService.deleteDocumentID(`Region`, `${region.id}`);
+    }
+  }
 }
