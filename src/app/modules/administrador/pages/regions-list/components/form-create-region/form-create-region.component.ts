@@ -97,8 +97,6 @@ export class FormCreateRegionComponent  implements OnInit{
   }
 
   async onSubmitRegion(){
-    console.log(this.createRegionForm.value);
-    console.log("Imagenes:: ", this.createRegionForm.get("images")?.value);
     this.newRegion.name = this.createRegionForm.get("name")?.value;
     this.newRegion.legend = this.createRegionForm.get("legend")?.value;
 
@@ -106,20 +104,20 @@ export class FormCreateRegionComponent  implements OnInit{
     if (this.newRegion.id.length <= 0){
       // Crear documento
       const id = await this.saveRegion();
+      this.newRegion.id = id;
 
       // Guardar imagen y agregar url al documento
       if(id.length > 0 && this.newFile !== null) {
-        console.log("NEW FILE: ", this.newFile);
-        const url = await this.saveImage(id);
+        await this.saveImage(id);
         await this.updateRegion(id);
       };
     }
     // Actualizar region
     else{
+      console.log("ACTUALIZAR");
       // Guardar imagen y agregar url al documento
       if(this.newFile !== null) {
-        console.log("NEW FILE: ", this.newFile);
-        const url = await this.saveImage(this.newRegion.id);
+        await this.saveImage(this.newRegion.id);
       };
       await this.updateRegion(this.newRegion.id);
     }
@@ -132,7 +130,6 @@ export class FormCreateRegionComponent  implements OnInit{
     await this.firestoreService.addDocument(this.newRegion, 'Regions').then(
       res => {
         id = res.id.toString();
-        console.log("ADD DOC: ", id)
       }
     );
     return id;
@@ -146,20 +143,16 @@ export class FormCreateRegionComponent  implements OnInit{
     return id;
   }
   async saveImage(id: string){
-    let url = "";
     await this.firebaseStorageService.uploadFile(`Regions/${id}`, this.newFile).then(
       urlImg => {
         this.newRegion.image = urlImg;
         this.newRegion.id = id;
-        console.log("NewRegion: ", this.newRegion);
       }
     )
-    return url;
   }
 
 
   async upLoadImage(event: any){
-    console.log("Upload Img")
     if (event.target.files && event.target.files[0]) {
       this.newFile = event.target.files[0];
       const reader = new FileReader();
