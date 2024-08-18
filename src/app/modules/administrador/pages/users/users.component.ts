@@ -1,30 +1,34 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FirestoreService } from '../../../../services/firestore.service';
 import { IDataUser } from '../../../../models/user.model';
+import { MenuPlacesComponent } from "../../../webside/components/menu-places/menu-places.component";
 @Component({
   selector: 'app-users',
   standalone: true,
   imports: [
     CommonModule,
-  ],
+    MenuPlacesComponent
+],
   templateUrl: './users.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersComponent implements OnInit {
-  firestoreService = inject(FirestoreService);
+
+  private firestoreService: FirestoreService = inject(FirestoreService);
+  private cd: ChangeDetectorRef = inject(ChangeDetectorRef);
   users: IDataUser[] = [];
 
+  constructor(){}
+
+
   ngOnInit(): void {
-    this.firestoreService.getCollectionChanges<IDataUser>("users").subscribe({
-      next: (users) => {
-        this.users = users;
-        console.log("Usuarios:: ", this.users);
-      },
-      error: error => console.log("Error de usuarios", error)
-    })
+    this.firestoreService.getCollectionChanges<IDataUser>("users").subscribe(
+      response => {
+        this.users = response;
+        this.cd.markForCheck();
+      }
+    )
   }
-
-
 
 }
